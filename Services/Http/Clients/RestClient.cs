@@ -35,7 +35,12 @@ namespace Services.Http.Clients
 
         public IHttpClientResponse Get(string endpoint)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+            request.Headers.Add("Token", tokenProvider.GetToken().ToString());
+
+            HttpResponseMessage message = client.SendAsync(request).Result;
+
+            return buildResponse(message);
         }
 
         public IHttpClientResponse Post(string endpoint, object parameters)

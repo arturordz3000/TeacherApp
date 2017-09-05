@@ -32,5 +32,16 @@ namespace TeacherHiringIntegrationTest.Http
             Assert.AreEqual("\"Authorized\"", response.GetContent());
             Assert.IsNotNull(response.GetHeader("token"));
         }
+
+        [TestMethod]
+        public void GetDataPerson_WhenValidToken_ReturnsData()
+        {
+            RestClient client = new RestClient(mockTokenProvider.Object);
+
+            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Usuario/GetDataPerson?token=MlsPdiXsWpuE6OFVLuj/a3/uuGz8zETh+dNzOl9x0HYS2Bjd1MZ1hOY9/eWrGRvuaUjMyr6gCy9BjSE3y8uAbQ==");
+
+            Assert.IsTrue(response.IsSuccessfulResponse());
+            Assert.IsNotNull(response.GetContent());
+        }
     }
 }
