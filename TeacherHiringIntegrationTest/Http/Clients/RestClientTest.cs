@@ -43,5 +43,20 @@ namespace TeacherHiringIntegrationTest.Http
             Assert.IsTrue(response.IsSuccessfulResponse());
             Assert.IsNotNull(response.GetContent());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetListMateriaApps_WhenNoTokenProvided_ThrowException()
+        {
+            Mock<ITokenProvider> mockTokenProvider = new Mock<ITokenProvider>();
+            mockTokenProvider.Setup(provider => provider.GetToken()).Returns(() => null);
+
+            RestClient client = new RestClient(mockTokenProvider.Object);
+
+            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
+
+            Assert.IsTrue(response.IsSuccessfulResponse());
+            Assert.IsNotNull(response.GetContent());
+        }
     }
 }

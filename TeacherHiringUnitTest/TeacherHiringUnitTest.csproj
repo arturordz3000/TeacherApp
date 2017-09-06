@@ -56,10 +56,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Authentication\AuthenticationServiceTest.cs" />
+    <Compile Include="Services\Authentication\Providers\TokenProviderTest.cs" />
     <Compile Include="Services\Http\Responses\HttpClientResponseTest.cs" />
     <Compile Include="Services\Http\Resolvers\EndpointResolverTest.cs" />
     <Compile Include="Services\Mocks\MockResponseModel.cs" />
-    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

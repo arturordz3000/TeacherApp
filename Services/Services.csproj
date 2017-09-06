@@ -37,11 +37,13 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />
+    <Compile Include="Authentication\Implementations\IStorage.cs" />
     <Compile Include="Authentication\Implementations\ITokenProvider.cs" />
     <Compile Include="Authentication\Models\Token.cs" />
-    <Compile Include="Authentication\Providers\SqliteTokenProvider.cs" />
+    <Compile Include="Authentication\Providers\TokenProvider.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\RequestFailedException.cs" />
+    <Compile Include="Exceptions\TokenExpiredException.cs" />
     <Compile Include="Http\Clients\RestClient.cs" />
     <Compile Include="Http\Responses\HttpClientResponse.cs" />
     <Compile Include="Http\Resolvers\EndpointResolver.cs" />
