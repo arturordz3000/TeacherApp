@@ -36,7 +36,7 @@ namespace Services.Http.Clients
         public IHttpClientResponse Get(string endpoint)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            request.Headers.Add("Token", tokenProvider.GetToken().ToString());
+            request.Headers.Add("Token", tokenProvider.GetToken().AccessValue);
 
             HttpResponseMessage message = client.SendAsync(request).Result;
 

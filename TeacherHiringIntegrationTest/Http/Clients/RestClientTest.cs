@@ -17,7 +17,7 @@ namespace TeacherHiringIntegrationTest.Http
 
         public RestClientTest()
         {
-            mockToken = new Token { AccessValue = "BQkGz1w+ERCD/dhqYSNQaitXWGiDuWtgzfMxmdPUre2tI+678Z9rGADPy3b6QkIYA1pPTL2Ln3OUkGtU772aTA==", ExpirySeconds = 43800 };
+            mockToken = new Token { AccessValue = "Xhbiu26IM/+/R9U+FZ1fmE5ivNdyYov/wxGW8dI9M8P55Fu0AN+XcAFCU5cyStbQxjY51o6uryisMXW1pu6TQg==", ExpirySeconds = 43800 };
             mockTokenProvider = new Mock<ITokenProvider>();
             mockTokenProvider.Setup(provider => provider.GetToken()).Returns(mockToken);
         }
@@ -34,11 +34,11 @@ namespace TeacherHiringIntegrationTest.Http
         }
 
         [TestMethod]
-        public void GetDataPerson_WhenValidToken_ReturnsData()
+        public void GetListMateriaApps_WhenValidToken_ReturnsData()
         {
             RestClient client = new RestClient(mockTokenProvider.Object);
 
-            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Usuario/GetDataPerson?token=MlsPdiXsWpuE6OFVLuj/a3/uuGz8zETh+dNzOl9x0HYS2Bjd1MZ1hOY9/eWrGRvuaUjMyr6gCy9BjSE3y8uAbQ==");
+            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
 
             Assert.IsTrue(response.IsSuccessfulResponse());
             Assert.IsNotNull(response.GetContent());
