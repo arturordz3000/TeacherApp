@@ -4,17 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Implementations;
+using Xamarin.Forms;
 
 namespace DataAccess
 {
     public class AppPropertiesStorage : IStorage
     {
+        private IDictionary<string, object> properties;
+
+        public AppPropertiesStorage(IDictionary<string, object> properties)
+        {
+            this.properties = properties;
+        }
+
         public object Get(object query)
         {
             string key = (string)query;
 
-            if (Xamarin.Forms.Application.Current.Properties.ContainsKey(key))
-                return Xamarin.Forms.Application.Current.Properties[key];
+            if (properties.ContainsKey(key))
+                return properties[key];
             else return null;
         }
 
@@ -23,7 +31,10 @@ namespace DataAccess
             string key = (string)obj[0];
             object value = obj[1];
 
-            Xamarin.Forms.Application.Current.Properties.Add(key, value);
+            if (properties.ContainsKey(key))
+                properties[key] = value;
+            else
+                properties.Add(key, value);
         }
 
         public int Delete(object query)

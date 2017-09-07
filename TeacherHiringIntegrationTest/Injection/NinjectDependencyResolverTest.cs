@@ -10,6 +10,8 @@ using Services.Http.Implementations;
 using Services.Http.Resolvers;
 using Common.Alerts;
 using Common.Handlers;
+using Moq;
+using System.Collections.Generic;
 
 namespace TeacherHiringIntegrationTest.Injection
 {
@@ -20,7 +22,7 @@ namespace TeacherHiringIntegrationTest.Injection
 
         public NinjectDependencyResolverTest()
         {
-            kernel = new StandardKernel(new TeacherHiringModule());
+            kernel = new StandardKernel(new TeacherHiringModule(new Dictionary<string, object>()));
         }
 
         [TestMethod]

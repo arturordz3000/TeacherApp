@@ -21,15 +21,17 @@ namespace TeacherHiring.Droid
 
             base.OnCreate(bundle);
 
-            initializeInjectionContainer();
-
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+
+            App app = new App();
+            initializeInjectionContainer(app);
+
+            LoadApplication(app);
         }
 
-        private void initializeInjectionContainer()
+        private void initializeInjectionContainer(App app)
         {
-            IKernel kernel = new StandardKernel(new TeacherHiring.Android.Injection.TeacherHiringModule());
+            IKernel kernel = new StandardKernel(new TeacherHiring.Android.Injection.TeacherHiringModule(app.Properties));
             App.DependencyResolver = new NinjectDependencyResolver(kernel);
             App.LogicContext = new Facades.AppFacade(App.DependencyResolver);
         }

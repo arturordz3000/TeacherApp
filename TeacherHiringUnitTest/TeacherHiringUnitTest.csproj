@@ -62,6 +62,7 @@
     <Compile Include="Services\Http\Responses\HttpClientResponseTest.cs" />
     <Compile Include="Services\Http\Resolvers\EndpointResolverTest.cs" />
     <Compile Include="Services\Mocks\MockResponseModel.cs" />
+    <Compile Include="Storage\AppPropertiesStorageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

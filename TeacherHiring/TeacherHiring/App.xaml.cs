@@ -17,7 +17,7 @@ namespace TeacherHiring
         public App()
         {
             InitializeComponent();
-            MainPage = new TeacherHiring.Views.Login.LoginPage();
+            MainPage = new NavigationPage(new TeacherHiring.Views.Login.LoginPage());
         }
 
         protected override void OnStart()
