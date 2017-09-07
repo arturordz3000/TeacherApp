@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Ninject;
+using TeacherHiring.Droid.Injection;
 
 namespace TeacherHiring.Droid
 {
@@ -19,8 +21,16 @@ namespace TeacherHiring.Droid
 
             base.OnCreate(bundle);
 
+            initializeInjectionContainer();
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+        }
+
+        private void initializeInjectionContainer()
+        {
+            IKernel kernel = new StandardKernel(new TeacherHiring.Android.Injection.TeacherHiringModule());
+            App.DependencyResolver = new NinjectDependencyResolver(kernel);
         }
     }
 }

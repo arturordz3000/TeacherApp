@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Authentication
 {
-    interface IAuthenticationService
+    public interface IAuthenticationService
     {
         Token Authenticate(string user, string password);
     }

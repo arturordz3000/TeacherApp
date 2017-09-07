@@ -6,6 +6,7 @@ using Services.Authentication.Providers;
 using Services.Authentication.Models;
 using Services.Exceptions;
 using System.Collections.Generic;
+using DataAccess.Implementations;
 
 namespace TeacherHiringUnitTest.Services.Authentication.Providers
 {

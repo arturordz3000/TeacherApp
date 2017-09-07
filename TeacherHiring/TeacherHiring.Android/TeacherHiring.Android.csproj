@@ -53,6 +53,9 @@
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.Ninject.3.3.1\lib\monoandroid\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ObjectModel" />
@@ -96,11 +99,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Injection\NinjectDependencyResolver.cs" />
+    <Compile Include="Injection\TeacherHiringModule.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -120,6 +126,18 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{2193e774-9734-46c0-a57a-5f9997b94f88}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\DataAccess.csproj">
+      <Project>{34e1be5e-50ee-4882-9e6f-2fb21e276de5}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Services.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TeacherHiring\TeacherHiring.csproj">
       <Project>{80b87f0a-3dfe-4ff4-ab87-0c077b309d68}</Project>
       <Name>TeacherHiring</Name>

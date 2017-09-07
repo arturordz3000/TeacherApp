@@ -50,21 +50,37 @@
     <Reference Include="Moq, Version=4.7.99.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.7.99\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.Ninject.3.3.1\lib\net40-client\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationServiceTest.cs" />
     <Compile Include="Http\Clients\RestClientTest.cs" />
+    <Compile Include="Injection\NinjectDependencyResolverTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{34e1be5e-50ee-4882-9e6f-2fb21e276de5}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherHiring\TeacherHiring.Android\TeacherHiring.Android.csproj">
+      <Project>{014D4145-BE19-478C-B75A-53A1E2E4C82C}</Project>
+      <Name>TeacherHiring.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeacherHiring\TeacherHiring\TeacherHiring.csproj">
+      <Project>{164A36E9-744D-4A0B-9283-3D1A5FCA9CBA}</Project>
+      <Name>TeacherHiring</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

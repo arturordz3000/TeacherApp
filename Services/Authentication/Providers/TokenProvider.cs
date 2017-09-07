@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Services.Authentication.Models;
 using Services.Exceptions;
+using DataAccess.Implementations;
 
 namespace Services.Authentication.Providers
 {
