@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ViewModels\LoginViewModelTest.cs" />
+    <Compile Include="Handlers\AppExceptionHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Authentication\AuthenticationServiceTest.cs" />
     <Compile Include="Services\Authentication\Providers\TokenProviderTest.cs" />
@@ -67,6 +68,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{2193E774-9734-46C0-A57A-5F9997B94F88}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{34e1be5e-50ee-4882-9e6f-2fb21e276de5}</Project>
       <Name>DataAccess</Name>

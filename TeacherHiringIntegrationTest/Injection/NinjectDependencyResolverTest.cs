@@ -8,6 +8,8 @@ using DataAccess.Implementations;
 using Services.Authentication.Implementations;
 using Services.Http.Implementations;
 using Services.Http.Resolvers;
+using Common.Alerts;
+using Common.Handlers;
 
 namespace TeacherHiringIntegrationTest.Injection
 {
@@ -62,6 +64,24 @@ namespace TeacherHiringIntegrationTest.Injection
         {
             NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
             object resolved = resolver.Resolve<IStorage>();
+
+            Assert.IsNotNull(resolved);
+        }
+
+        [TestMethod]
+        public void ResolveAsIAlertDisplayer_WithTeacherHiringModule_DependenciesShouldBeResolved()
+        {
+            NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
+            object resolved = resolver.Resolve<IAlertDisplayer>();
+
+            Assert.IsNotNull(resolved);
+        }
+
+        [TestMethod]
+        public void ResolveAsIAlertExceptionHandler_WithTeacherHiringModule_DependenciesShouldBeResolved()
+        {
+            NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
+            object resolved = resolver.Resolve<IAlertExceptionHandler>();
 
             Assert.IsNotNull(resolved);
         }

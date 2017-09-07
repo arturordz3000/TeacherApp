@@ -31,7 +31,7 @@ namespace Services.Authentication
             validateResponse(endpoint, response);
 
             string accessValue = response.GetHeader("token");
-            long expirySeconds = long.Parse(response.GetHeader("tokenexpiry"));
+            int expirySeconds = int.Parse(response.GetHeader("tokenexpiry"));
 
             return new Token { AccessValue = accessValue, ExpirySeconds = expirySeconds };
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TeacherHiring.Facades;
 using TeacherHiring.Injection;
 using Xamarin.Forms;
 
@@ -11,6 +12,7 @@ namespace TeacherHiring
     public partial class App : Application
     {
         public static IDependencyResolver DependencyResolver { get; set; }
+        public static AppFacade LogicContext { get; set; }
 
         public App()
         {

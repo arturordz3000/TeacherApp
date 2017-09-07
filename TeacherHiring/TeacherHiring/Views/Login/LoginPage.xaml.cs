@@ -1,4 +1,6 @@
-﻿using Services.Authentication;
+﻿using Common.Handlers;
+using Services.Authentication;
+using Services.Authentication.Implementations;
 using Services.Authentication.Models;
 using System;
 using System.Collections.Generic;
@@ -14,12 +16,9 @@ namespace TeacherHiring.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private IAuthenticationService authenticationService;
-
         public LoginPage()
         {
             InitializeComponent();
-            authenticationService = App.DependencyResolver.Resolve<IAuthenticationService>();
         }
 
         private void LoginButton_Clicked(object sender, EventArgs e)
@@ -27,12 +26,14 @@ namespace TeacherHiring.Views.Login
             try
             {
                 LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
-                Token accessToken = authenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
-                int debug = 0;
+                Token accessToken = App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
+                App.LogicContext.TokenProvider.SaveToken(accessToken);
+
+                Navigation.PushAsync(new Dashboard.DashboardPage());
             }
             catch (Exception ex)
             {
-                // TODO: Show message
+                App.LogicContext.ExceptionHandler.HandleException(this, ex);
             }
         }
     }

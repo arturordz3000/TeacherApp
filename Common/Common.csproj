@@ -35,7 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Alerts\PageAlertDisplayer.cs" />
+    <Compile Include="Alerts\IAlertDisplayer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Handlers\AppExceptionHandler.cs" />
+    <Compile Include="Handlers\IAlertExceptionHandler.cs" />
+    <Compile Include="Handlers\IExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

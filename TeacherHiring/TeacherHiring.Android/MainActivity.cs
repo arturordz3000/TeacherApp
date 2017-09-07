@@ -31,6 +31,7 @@ namespace TeacherHiring.Droid
         {
             IKernel kernel = new StandardKernel(new TeacherHiring.Android.Injection.TeacherHiringModule());
             App.DependencyResolver = new NinjectDependencyResolver(kernel);
+            App.LogicContext = new Facades.AppFacade(App.DependencyResolver);
         }
     }
 }

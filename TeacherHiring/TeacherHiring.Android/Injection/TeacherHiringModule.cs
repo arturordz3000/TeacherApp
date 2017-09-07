@@ -14,6 +14,8 @@ using Services.Http.Implementations;
 using Services.Authentication.Implementations;
 using Services.Http.Resolvers;
 using Services.Http.Responses;
+using Common.Alerts;
+using Common.Handlers;
 
 namespace TeacherHiring.Android.Injection
 {
@@ -26,6 +28,8 @@ namespace TeacherHiring.Android.Injection
             Bind<IHttpClient>().To<RestClient>();
             Bind<EndpointResolver>().ToSelf().WithConstructorArgument("baseUrl", Common.Constants.ApiUrl);
             Bind<IStorage>().To<AppPropertiesStorage>();
+            Bind<IAlertDisplayer>().To<PageAlertDisplayer>();
+            Bind<IAlertExceptionHandler>().To<AppExceptionHandler>();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace Services.Authentication.Models
     public class Token
     {
         public string AccessValue { get; set; }
-        public long ExpirySeconds { get; set; }
+        public int ExpirySeconds { get; set; }
     }
 }
