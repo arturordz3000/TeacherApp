@@ -33,22 +33,25 @@ namespace Services.Http.Clients
             return client;
         }
 
-        public IHttpClientResponse Get(string endpoint)
+        public async Task<IHttpClientResponse> Get(string endpoint)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            request.Headers.Add("Token", tokenProvider.GetToken().AccessValue);
+            Token token = tokenProvider.GetToken();
 
-            HttpResponseMessage message = client.SendAsync(request).Result;
+            if (token != null && !string.IsNullOrEmpty(token.AccessValue))
+                request.Headers.Add("Token", tokenProvider.GetToken().AccessValue);
+
+            HttpResponseMessage message = await client.SendAsync(request);
 
             return buildResponse(message);
         }
 
-        public IHttpClientResponse Post(string endpoint, object parameters)
+        public async Task<IHttpClientResponse> Post(string endpoint, object parameters)
         {
             string json = JsonConvert.SerializeObject(parameters);
 
             HttpContent content = buildContent(tokenProvider.GetToken(), json);
-            HttpResponseMessage message = client.PostAsync(endpoint, content).Result;
+            HttpResponseMessage message = await client.PostAsync(endpoint, content);
 
             return buildResponse(message);
         }

@@ -8,6 +8,7 @@ using Services.Authentication;
 using Services.Http.Resolvers;
 using Services.Exceptions;
 using Services.Http.Implementations;
+using System.Threading.Tasks;
 
 namespace TeacherHiringIntegrationTest.Authentication
 {
@@ -26,12 +27,12 @@ namespace TeacherHiringIntegrationTest.Authentication
         }
 
         [TestMethod]
-        public void Authenticate_WhenValidCredentials_ReturnToken()
+        public async Task Authenticate_WhenValidCredentials_ReturnToken()
         {
             RestClient client = new RestClient(mockTokenProvider.Object);
             AuthenticationService authenticationService = new AuthenticationService(client, new EndpointResolver(baseUrl));
 
-            Token token = authenticationService.Authenticate("arodriguez", "admin123$");
+            Token token = await authenticationService.Authenticate("arodriguez", "admin123$");
 
             Assert.IsNotNull(token);
             Assert.AreEqual(43800, token.ExpirySeconds);
@@ -39,23 +40,23 @@ namespace TeacherHiringIntegrationTest.Authentication
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialsException))]
-        public void Authenticate_WhenNotValidCredentials_ThrowsException()
+        public async Task Authenticate_WhenNotValidCredentials_ThrowsException()
         {
             RestClient client = new RestClient(mockTokenProvider.Object);
             AuthenticationService authenticationService = new AuthenticationService(client, new EndpointResolver(baseUrl));
 
-            Token token = authenticationService.Authenticate("NotValidUser", "NotValidPassword");
+            Token token = await authenticationService.Authenticate("NotValidUser", "NotValidPassword");
         }
 
         [TestMethod]
         [ExpectedException(typeof(RequestFailedException))]
-        public void Authenticate_WhenUnsuccessfulResponseCode_ThrowsException()
+        public async Task Authenticate_WhenUnsuccessfulResponseCode_ThrowsException()
         {
             string invalidEndpoint = baseUrl + "InvalidURL/";
             RestClient client = new RestClient(mockTokenProvider.Object);
             AuthenticationService authenticationService = new AuthenticationService(client, new EndpointResolver(invalidEndpoint));
 
-            Token token = authenticationService.Authenticate("arodriguez", "admin123$");
+            Token token = await authenticationService.Authenticate("arodriguez", "admin123$");
         }
     }
 }

@@ -9,6 +9,6 @@ namespace Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Token Authenticate(string user, string password);
+        Task<Token> Authenticate(string user, string password);
     }
 }

@@ -21,15 +21,15 @@ namespace TeacherHiring.Views.Login
             InitializeComponent();
         }
 
-        private void LoginButton_Clicked(object sender, EventArgs e)
+        private async Task LoginButton_Clicked(object sender, EventArgs e)
         {
             try
             {
                 LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
-                Token accessToken = App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
+                Token accessToken = await App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
                 App.LogicContext.TokenProvider.SaveToken(accessToken);
 
-                Navigation.PushAsync(new Dashboard.DashboardPage());
+                App.Current.MainPage = new Dashboard.DashboardPage();
             }
             catch (Exception ex)
             {

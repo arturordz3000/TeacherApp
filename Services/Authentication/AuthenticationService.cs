@@ -23,10 +23,10 @@ namespace Services.Authentication
             this.endpointResolver = endpointResolver;
         }
 
-        public Token Authenticate(string user, string password)
+        public async Task<Token> Authenticate(string user, string password)
         {
             string endpoint = endpointResolver.ResolveUrl("Authenticate", "Authenticate");
-            IHttpClientResponse response = httpClient.Post(endpoint, new { ClaveAcceso = user, Contrasena = password });
+            IHttpClientResponse response = await httpClient.Post(endpoint, new { ClaveAcceso = user, Contrasena = password });
 
             validateResponse(endpoint, response);
 

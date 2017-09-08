@@ -9,7 +9,7 @@ namespace Services.Http.Implementations
 {
     public interface IHttpClient
     {
-        IHttpClientResponse Post(string endpoint, object parameters);
-        IHttpClientResponse Get(string endpoint);
+        Task<IHttpClientResponse> Post(string endpoint, object parameters);
+        Task<IHttpClientResponse> Get(string endpoint);
     }
 }

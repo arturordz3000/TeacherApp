@@ -8,6 +8,7 @@ using Services.Exceptions;
 using Services.Http.Implementations;
 using Services.Http.Resolvers;
 using Services.Authentication.Models;
+using System.Threading.Tasks;
 
 namespace TeacherHiringUnitTest.Services.Authentication
 {
@@ -17,7 +18,7 @@ namespace TeacherHiringUnitTest.Services.Authentication
         private EndpointResolver mockEndpointResolver = new EndpointResolver("someUrl");
 
         [TestMethod]
-        public void Authenticate_WhenValidCredentials_ReturnToken()
+        public async Task Authenticate_WhenValidCredentials_ReturnToken()
         {
             Mock<IHttpClientResponse> mockHttpClientResponse = new Mock<IHttpClientResponse>();
             mockHttpClientResponse.Setup(client => client.GetContent()).Returns("Authorized");
@@ -28,7 +29,7 @@ namespace TeacherHiringUnitTest.Services.Authentication
             Mock<IHttpClient> mockHttpClient = createMockHttpClient(mockHttpClientResponse);
 
             AuthenticationService authenticationService = new AuthenticationService(mockHttpClient.Object, mockEndpointResolver);
-            Token token = authenticationService.Authenticate("ValidUser", "ValidPassword");
+            Token token = await authenticationService.Authenticate("ValidUser", "ValidPassword");
 
             Assert.IsNotNull(token);
             Assert.AreEqual("g+s6yrDPNBgsXu6EGaGlZfXYKoJafkZxncqDWriNvz46QQTNfzGyNDaCy6xD3iN2IxVuBk8r3R5dFX7bl8wc3g==", token.AccessValue);
@@ -37,7 +38,7 @@ namespace TeacherHiringUnitTest.Services.Authentication
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialsException))]
-        public void Authenticate_WhenNotValidCredentials_ThrowsException()
+        public async Task Authenticate_WhenNotValidCredentials_ThrowsException()
         {
             Mock<IHttpClientResponse> mockHttpClientResponse = new Mock<IHttpClientResponse>();
             mockHttpClientResponse.Setup(client => client.GetContent()).Returns("Not User Found");
@@ -46,12 +47,12 @@ namespace TeacherHiringUnitTest.Services.Authentication
             Mock<IHttpClient> mockHttpClient = createMockHttpClient(mockHttpClientResponse);
 
             AuthenticationService authenticationService = new AuthenticationService(mockHttpClient.Object, mockEndpointResolver);
-            Token token = authenticationService.Authenticate("NotValidUser", "NotValidPassword");
+            Token token = await authenticationService.Authenticate("NotValidUser", "NotValidPassword");
         }
 
         [TestMethod]
         [ExpectedException(typeof(RequestFailedException))]
-        public void Authenticate_WhenUnsuccessfulResponseCode_ThrowsException()
+        public async Task Authenticate_WhenUnsuccessfulResponseCode_ThrowsException()
         {
             Mock<IHttpClientResponse> mockHttpClientResponse = new Mock<IHttpClientResponse>();
             mockHttpClientResponse.Setup(client => client.IsSuccessfulResponse()).Returns(false);
@@ -59,7 +60,7 @@ namespace TeacherHiringUnitTest.Services.Authentication
             Mock<IHttpClient> mockHttpClient = createMockHttpClient(mockHttpClientResponse);
 
             AuthenticationService authenticationService = new AuthenticationService(mockHttpClient.Object, mockEndpointResolver);
-            Token token = authenticationService.Authenticate("NotValidUser", "NotValidPassword");
+            Token token = await authenticationService.Authenticate("NotValidUser", "NotValidPassword");
         }
 
         private Mock<IHttpClient> createMockHttpClient(Mock<IHttpClientResponse> mockHttpClientResponse)
@@ -67,7 +68,7 @@ namespace TeacherHiringUnitTest.Services.Authentication
             Mock<IHttpClient> mockHttpClient = new Mock<IHttpClient>();
 
             mockHttpClient.Setup(client => client.Post(It.IsAny<string>(), It.IsNotNull<object>()))
-               .Returns(mockHttpClientResponse.Object);
+               .Returns(Task.FromResult(mockHttpClientResponse.Object));
 
             return mockHttpClient;
         }

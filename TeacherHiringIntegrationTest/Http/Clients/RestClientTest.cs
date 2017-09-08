@@ -6,6 +6,7 @@ using Services.Http.Implementations;
 using Moq;
 using Services.Authentication.Implementations;
 using Services.Authentication.Models;
+using System.Threading.Tasks;
 
 namespace TeacherHiringIntegrationTest.Http
 {
@@ -23,37 +24,37 @@ namespace TeacherHiringIntegrationTest.Http
         }
 
         [TestMethod]
-        public void PostAuthenticate_WhenValidCredentials_ReturnsToken()
+        public async Task PostAuthenticate_WhenValidCredentials_ReturnsToken()
         {
             RestClient client = new RestClient(mockTokenProvider.Object);
 
-            IHttpClientResponse response = client.Post("http://online.cuprum.com/webapixamarin/Api/Authenticate/Authenticate", new { ClaveAcceso = "arodriguez", Contrasena = "admin123$" });
+            IHttpClientResponse response = await client.Post("http://online.cuprum.com/webapixamarin/Api/Authenticate/Authenticate", new { ClaveAcceso = "arodriguez", Contrasena = "admin123$" });
 
             Assert.AreEqual("\"Authorized\"", response.GetContent());
             Assert.IsNotNull(response.GetHeader("token"));
         }
 
         [TestMethod]
-        public void GetListMateriaApps_WhenValidToken_ReturnsData()
+        public async Task GetListMateriaApps_WhenValidToken_ReturnsData()
         {
             RestClient client = new RestClient(mockTokenProvider.Object);
 
-            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
+            IHttpClientResponse response = await client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
 
             Assert.IsTrue(response.IsSuccessfulResponse());
             Assert.IsNotNull(response.GetContent());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetListMateriaApps_WhenNoTokenProvided_ThrowException()
+        public async Task GetListMateriaApps_WhenNoTokenProvided_ReturnsUnsuccessfulResponse()
         {
             Mock<ITokenProvider> mockTokenProvider = new Mock<ITokenProvider>();
             mockTokenProvider.Setup(provider => provider.GetToken()).Returns(() => null);
 
             RestClient client = new RestClient(mockTokenProvider.Object);
 
-            IHttpClientResponse response = client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
+            IHttpClientResponse response = await client.Get("http://online.cuprum.com/webapixamarin/api/Materia/GetListMateriaApps");
+            Assert.IsFalse(response.IsSuccessfulResponse());
         }
     }
 }
