@@ -12,9 +12,9 @@ namespace Services.Authentication.Providers
 {
     public class TokenProvider : ITokenProvider
     {
-        private IStorage storage;
+        private ICacheStorage storage;
 
-        public TokenProvider(IStorage storage)
+        public TokenProvider(ICacheStorage storage)
         {
             this.storage = storage;
         }

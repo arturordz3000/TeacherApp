@@ -65,7 +65,7 @@ namespace TeacherHiringIntegrationTest.Injection
         public void ResolveAsIStorage_WithTeacherHiringModule_DependenciesShouldBeResolved()
         {
             NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
-            object resolved = resolver.Resolve<IStorage>();
+            object resolved = resolver.Resolve<ICacheStorage>();
 
             Assert.IsNotNull(resolved);
         }

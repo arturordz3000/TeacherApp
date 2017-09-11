@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Implementations
 {
-    public interface IStorage
+    public interface ICacheStorage
     {
         object Get(object query);
         void Save(params object[] obj);

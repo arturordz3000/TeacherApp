@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace DataAccess
 {
-    public class AppPropertiesStorage : IStorage
+    public class AppPropertiesStorage : ICacheStorage
     {
         private IDictionary<string, object> properties;
 

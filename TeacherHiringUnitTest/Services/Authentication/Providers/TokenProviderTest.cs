@@ -16,7 +16,7 @@ namespace TeacherHiringUnitTest.Services.Authentication.Providers
         [TestMethod]
         public void GetToken_WhenValidTokenExists_ReturnToken()
         {
-            Mock<IStorage> storageMock = new Mock<IStorage>();
+            Mock<ICacheStorage> storageMock = new Mock<ICacheStorage>();
             storageMock.Setup(storage => storage.Get("token")).Returns("g+s6yrDPNBgsXu6EGaGlZfXYKoJafkZxncqDWriNvz46QQTNfzGyNDaCy6xD3iN2IxVuBk8r3R5dFX7bl8wc3g==");
             storageMock.Setup(storage => storage.Get("tokenexpiry")).Returns(43800);
             storageMock.Setup(storage => storage.Get("tokendatetime")).Returns(DateTime.Now);
@@ -34,7 +34,7 @@ namespace TeacherHiringUnitTest.Services.Authentication.Providers
         [ExpectedException(typeof(TokenExpiredException))]
         public void GetToken_WhenTokenExpired_ThrowException()
         {
-            Mock<IStorage> storageMock = new Mock<IStorage>();
+            Mock<ICacheStorage> storageMock = new Mock<ICacheStorage>();
             storageMock.Setup(storage => storage.Get("token")).Returns("g+s6yrDPNBgsXu6EGaGlZfXYKoJafkZxncqDWriNvz46QQTNfzGyNDaCy6xD3iN2IxVuBk8r3R5dFX7bl8wc3g==");
             storageMock.Setup(storage => storage.Get("tokenexpiry")).Returns(43800);
             storageMock.Setup(storage => storage.Get("tokendatetime")).Returns(DateTime.Now.AddSeconds(-43801));
@@ -47,7 +47,7 @@ namespace TeacherHiringUnitTest.Services.Authentication.Providers
         [TestMethod]
         public void GetToken_WhenTokenNotFound_ReturnNull()
         {
-            Mock<IStorage> storageMock = new Mock<IStorage>();
+            Mock<ICacheStorage> storageMock = new Mock<ICacheStorage>();
             storageMock.Setup(storage => storage.Get("token")).Returns(() => null);
 
             TokenProvider tokenProvider = new TokenProvider(storageMock.Object);
@@ -60,7 +60,7 @@ namespace TeacherHiringUnitTest.Services.Authentication.Providers
         [TestMethod]
         public void SaveToken_WhenTokenIsValid_CallStorageSaveMethod()
         {
-            Mock<IStorage> storageMock = new Mock<IStorage>();
+            Mock<ICacheStorage> storageMock = new Mock<ICacheStorage>();
             Token mockToken = new Token
             {
                 AccessValue = "g+s6yrDPNBgsXu6EGaGlZfXYKoJafkZxncqDWriNvz46QQTNfzGyNDaCy6xD3iN2IxVuBk8r3R5dFX7bl8wc3g==",
@@ -80,7 +80,7 @@ namespace TeacherHiringUnitTest.Services.Authentication.Providers
         [ExpectedException(typeof(ArgumentNullException))]
         public void SaveToken_WhenTokenIsNull_CallStorageSaveMethod()
         {
-            Mock<IStorage> storageMock = new Mock<IStorage>();
+            Mock<ICacheStorage> storageMock = new Mock<ICacheStorage>();
 
             TokenProvider tokenProvider = new TokenProvider(storageMock.Object);
 

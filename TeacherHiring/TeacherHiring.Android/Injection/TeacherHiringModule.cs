@@ -34,7 +34,7 @@ namespace TeacherHiring.Android.Injection
             Bind<ITokenProvider>().To<TokenProvider>();
             Bind<IHttpClient>().To<RestClient>();
             Bind<EndpointResolver>().ToSelf().WithConstructorArgument("baseUrl", Common.Constants.ApiUrl);
-            Bind<IStorage>().To<AppPropertiesStorage>().WithConstructorArgument("properties", appProperties);
+            Bind<ICacheStorage>().To<AppPropertiesStorage>().WithConstructorArgument("properties", appProperties);
             Bind<IAlertDisplayer>().To<PageAlertDisplayer>();
             Bind<IAlertExceptionHandler>().To<AppExceptionHandler>();
         }
