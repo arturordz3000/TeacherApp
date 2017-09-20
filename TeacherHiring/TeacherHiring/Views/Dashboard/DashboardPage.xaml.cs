@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainEntities.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace TeacherHiring.Views.Dashboard
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DashboardPage : MasterDetailPage
     {
-        public DashboardPage()
+        public DashboardPage(UserDto user)
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;

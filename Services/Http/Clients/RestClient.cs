@@ -76,5 +76,10 @@ namespace Services.Http.Clients
 
             return new HttpClientResponse(jsonResult, headers, message.IsSuccessStatusCode);
         }
+
+        public ITokenProvider GetTokenProvider()
+        {
+            return tokenProvider;
+        }
     }
 }

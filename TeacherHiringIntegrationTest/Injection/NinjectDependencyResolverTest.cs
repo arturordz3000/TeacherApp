@@ -12,6 +12,7 @@ using Common.Alerts;
 using Common.Handlers;
 using Moq;
 using System.Collections.Generic;
+using Services.Users;
 
 namespace TeacherHiringIntegrationTest.Injection
 {
@@ -84,6 +85,33 @@ namespace TeacherHiringIntegrationTest.Injection
         {
             NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
             object resolved = resolver.Resolve<IAlertExceptionHandler>();
+
+            Assert.IsNotNull(resolved);
+        }
+
+        [TestMethod]
+        public void ResolveAsIUsersServiceHandler_WithTeacherHiringModule_DependenciesShouldBeResolved()
+        {
+            NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
+            object resolved = resolver.Resolve<IUsersService>();
+
+            Assert.IsNotNull(resolved);
+        }
+
+        [TestMethod]
+        public void ResolveAsIContext_WithTeacherHiringModule_DependenciesShouldBeResolved()
+        {
+            NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
+            object resolved = resolver.Resolve<IContext>();
+
+            Assert.IsNotNull(resolved);
+        }
+
+        [TestMethod]
+        public void ResolveAsIUnitOfWork_WithTeacherHiringModule_DependenciesShouldBeResolved()
+        {
+            NinjectDependencyResolver resolver = new NinjectDependencyResolver(kernel);
+            object resolved = resolver.Resolve<IUnitOfWork>();
 
             Assert.IsNotNull(resolved);
         }

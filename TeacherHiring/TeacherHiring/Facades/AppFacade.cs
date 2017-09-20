@@ -2,6 +2,7 @@
 using Services.Authentication;
 using Services.Authentication.Implementations;
 using Services.Exceptions;
+using Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace TeacherHiring.Facades
         private IAuthenticationService authenticationService;
         private ITokenProvider tokenProvider;
         private IExceptionHandler exceptionHandler;
+        private IUsersService usersService;
 
         public AppFacade(IDependencyResolver dependencyResolver)
         {
@@ -63,6 +65,17 @@ namespace TeacherHiring.Facades
             exceptionHandler.RegisterExceptionType(typeof(InvalidCredentialsException), "Tu nombre de usuario o contraseña son incorrectos.");
 
             return exceptionHandler;
+        }
+
+        public IUsersService UsersService
+        {
+            get
+            {
+                if (usersService == null)
+                    usersService = dependencyResolver.Resolve<IUsersService>();
+
+                return usersService;
+            }
         }
     }
 }

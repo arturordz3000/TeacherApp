@@ -16,6 +16,8 @@ using Services.Http.Resolvers;
 using Services.Http.Responses;
 using Common.Alerts;
 using Common.Handlers;
+using Services.Users;
+using DataAccess.Sqlite;
 
 namespace TeacherHiring.Android.Injection
 {
@@ -37,6 +39,9 @@ namespace TeacherHiring.Android.Injection
             Bind<ICacheStorage>().To<AppPropertiesStorage>().WithConstructorArgument("properties", appProperties);
             Bind<IAlertDisplayer>().To<PageAlertDisplayer>();
             Bind<IAlertExceptionHandler>().To<AppExceptionHandler>();
+            Bind<IUsersService>().To<UsersService>();
+            Bind<IUnitOfWork>().To<SqliteUnitOfWork>().InSingletonScope();
+            Bind<IContext>().To<SqliteContext>();
         }
     }
 }

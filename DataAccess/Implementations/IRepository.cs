@@ -13,12 +13,10 @@ namespace DataAccess.Implementations
 
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
 
-        void Add(T entity);
+        object Add(T entity);
 
-        void AddRange(IEnumerable<T> range);
+        object Update(T entity);
 
-        void Update(T entity);
-
-        void Delete(T entity);
+        object Delete(T entity);
     }
 }

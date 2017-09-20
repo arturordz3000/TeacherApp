@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Sqlite.Models
 {
-    public class Users
+    public class User
     {
         [PrimaryKey]
-        public string User { get; set; }
+        public int UserId { get; set; }
 
-        public int UserType { get; set; }
+        public int UserTypeId { get; set; }
 
         public string Name { get; set; }
 
-        public string LastName { get; set; }
+        public DateTime UserCreatedOn { get; set; }
 
         public string Token { get; set; }
     }

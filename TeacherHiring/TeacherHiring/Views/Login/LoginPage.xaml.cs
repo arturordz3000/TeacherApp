@@ -1,4 +1,5 @@
 ﻿using Common.Handlers;
+using DomainEntities.DataTransferObjects;
 using Services.Authentication;
 using Services.Authentication.Implementations;
 using Services.Authentication.Models;
@@ -27,9 +28,13 @@ namespace TeacherHiring.Views.Login
             {
                 LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
                 Token accessToken = await App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
+
                 App.LogicContext.TokenProvider.SaveToken(accessToken);
 
-                App.Current.MainPage = new Dashboard.DashboardPage();
+                UserDto user = await App.LogicContext.UsersService.GetUserData();
+                App.LogicContext.UsersService.SaveUserData(user);
+
+                App.Current.MainPage = new Dashboard.DashboardPage(user);
             }
             catch (Exception ex)
             {

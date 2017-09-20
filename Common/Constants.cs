@@ -9,5 +9,6 @@ namespace TeacherHiring.Common
     public class Constants
     {
         public static readonly string ApiUrl = "http://online.cuprum.com/webapixamarin/Api/";
+        public static readonly string SqliteDBFile = "TeacherHiringDB.db3";
     }
 }

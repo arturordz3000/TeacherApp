@@ -55,7 +55,7 @@ namespace TeacherHiringUnitTest.Services.Http
         }
 
         [TestMethod]
-        public void GetContent_WhenContentNotNull_ReturnObject()
+        public void GetContent_WhenContentNotNull_ReturnStringContent()
         {
             HttpClientResponse response = new HttpClientResponse("{Property1: 1, Property2: '2', Property3: {SubProperty1: 1}}", new Dictionary<string, string>(), true);
             Assert.IsNotNull(response.GetContent());

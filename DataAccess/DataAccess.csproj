@@ -37,12 +37,16 @@
   <ItemGroup>
     <Compile Include="AppPropertiesStorage.cs" />
     <Compile Include="Implementations\ICacheStorage.cs" />
+    <Compile Include="Implementations\IContext.cs" />
     <Compile Include="Implementations\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementations\IUnitOfWork.cs" />
     <Compile Include="Sqlite\Models\AcceptedCourses.cs" />
     <Compile Include="Sqlite\Models\RequestedCourses.cs" />
-    <Compile Include="Sqlite\Models\Users.cs" />
-    <Compile Include="Sqlite\SqliteStorage.cs" />
+    <Compile Include="Sqlite\Models\User.cs" />
+    <Compile Include="Sqlite\Repositories\UsersRepository.cs" />
+    <Compile Include="Sqlite\SqliteContext.cs" />
+    <Compile Include="Sqlite\SqliteUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -74,7 +78,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Sqlite\Repositories\" />
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{2193E774-9734-46C0-A57A-5F9997B94F88}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainEntities\DomainEntities.csproj">
+      <Project>{8F85C6DC-F67D-43AC-900F-6199B77F9A0F}</Project>
+      <Name>DomainEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
