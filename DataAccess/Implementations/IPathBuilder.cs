@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Implementations
 {
-    public interface ICacheStorage
+    public interface IPathBuilder
     {
-        object Get(string query);
-        void Save(string key, object value);
-        int Delete(string query);
+        string Build(string fileName);
     }
 }

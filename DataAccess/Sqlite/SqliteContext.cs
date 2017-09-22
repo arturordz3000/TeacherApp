@@ -3,6 +3,7 @@ using DataAccess.Sqlite.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,10 @@ namespace DataAccess.Sqlite
     {
         private SQLiteConnection database;
 
-        public SqliteContext()
+        public SqliteContext(IPathBuilder pathBuilder)
         {
-            database = new SQLiteConnection(Constants.SqliteDBFile);
+            string path = pathBuilder.Build(Constants.SqliteDBFile);
+            database = new SQLiteConnection(path);
             initialize();
         }
 

@@ -26,7 +26,7 @@ namespace Services.Authentication
         public async Task<Token> Authenticate(string user, string password)
         {
             string endpoint = endpointResolver.ResolveUrl("Authenticate", "Authenticate");
-            IHttpClientResponse response = await httpClient.Post(endpoint, new { ClaveAcceso = user, Contrasena = password });
+            IHttpClientResponse response = await httpClient.Post(endpoint, new { ClaveAcceso = user, Contrasena = password }, false);
 
             validateResponse(endpoint, response);
 

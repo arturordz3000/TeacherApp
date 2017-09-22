@@ -27,5 +27,10 @@ namespace TeacherHiring.Droid.Injection
         {
             return kernel.Get<T>();
         }
+
+        public T Resolve<T>(string name)
+        {
+            return kernel.Get<T>(name);
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Services.Http.Implementations
     public interface IHttpClient
     {
         ITokenProvider GetTokenProvider();
-        Task<IHttpClientResponse> Post(string endpoint, object parameters);
-        Task<IHttpClientResponse> Get(string endpoint);
+        Task<IHttpClientResponse> Post(string endpoint, object parameters, bool requiresAuthentication = true);
+        Task<IHttpClientResponse> Get(string endpoint, bool requiresAuthentication = true);
     }
 }

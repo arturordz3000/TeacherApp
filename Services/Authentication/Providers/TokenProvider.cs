@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Services.Authentication.Models;
 using Services.Exceptions;
 using DataAccess.Implementations;
+using Ninject;
 
 namespace Services.Authentication.Providers
 {
@@ -14,7 +15,7 @@ namespace Services.Authentication.Providers
     {
         private ICacheStorage storage;
 
-        public TokenProvider(ICacheStorage storage)
+        public TokenProvider([Named("AppProperties")]ICacheStorage storage)
         {
             this.storage = storage;
         }

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TeacherHiring.Injection
+namespace Common.Enums
 {
-    public interface IDependencyResolver
+    public enum UserType
     {
-        T Resolve<T>();
-        T Resolve<T>(string name);
+        Teacher = 1,
+        Student = 2
     }
 }

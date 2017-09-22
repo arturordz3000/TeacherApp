@@ -1,7 +1,9 @@
 ﻿using Common.Handlers;
+using DataAccess.Implementations;
 using Services.Authentication;
 using Services.Authentication.Implementations;
 using Services.Exceptions;
+using Services.Subjects;
 using Services.Users;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeacherHiring.Injection;
+using TeacherHiring.Views.Dashboard.Factory;
 
 namespace TeacherHiring.Facades
 {
@@ -20,6 +23,9 @@ namespace TeacherHiring.Facades
         private ITokenProvider tokenProvider;
         private IExceptionHandler exceptionHandler;
         private IUsersService usersService;
+        private ICacheStorage sessionStorage;
+        private IDetailPageFactory detailPageFactory;
+        private ISubjectsService subjectsService;
 
         public AppFacade(IDependencyResolver dependencyResolver)
         {
@@ -75,6 +81,39 @@ namespace TeacherHiring.Facades
                     usersService = dependencyResolver.Resolve<IUsersService>();
 
                 return usersService;
+            }
+        }
+
+        public ICacheStorage SessionStorage
+        {
+            get
+            {
+                if (sessionStorage == null)
+                    sessionStorage = dependencyResolver.Resolve<ICacheStorage>("Session");
+
+                return sessionStorage;
+            }
+        }
+
+        public IDetailPageFactory DetailPageFactory
+        {
+            get
+            {
+                if (detailPageFactory == null)
+                    detailPageFactory = dependencyResolver.Resolve<IDetailPageFactory>();
+
+                return detailPageFactory;
+            }
+        }
+
+        public ISubjectsService SubjectsService
+        {
+            get
+            {
+                if (subjectsService == null)
+                    subjectsService = dependencyResolver.Resolve<ISubjectsService>();
+
+                return subjectsService;
             }
         }
     }

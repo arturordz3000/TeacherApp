@@ -33,10 +33,10 @@ namespace Services.Http.Clients
             return client;
         }
 
-        public async Task<IHttpClientResponse> Get(string endpoint)
+        public async Task<IHttpClientResponse> Get(string endpoint, bool requiresAuthentication = true)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            Token token = tokenProvider.GetToken();
+            Token token = requiresAuthentication ? tokenProvider.GetToken() : null;
 
             if (token != null && !string.IsNullOrEmpty(token.AccessValue))
                 request.Headers.Add("Token", tokenProvider.GetToken().AccessValue);
@@ -46,11 +46,13 @@ namespace Services.Http.Clients
             return buildResponse(message);
         }
 
-        public async Task<IHttpClientResponse> Post(string endpoint, object parameters)
+        public async Task<IHttpClientResponse> Post(string endpoint, object parameters, bool requiresAuthentication = true)
         {
             string json = JsonConvert.SerializeObject(parameters);
 
-            HttpContent content = buildContent(tokenProvider.GetToken(), json);
+            Token token = requiresAuthentication ? tokenProvider.GetToken() : null;
+
+            HttpContent content = buildContent(token, json);
             HttpResponseMessage message = await client.PostAsync(endpoint, content);
 
             return buildResponse(message);

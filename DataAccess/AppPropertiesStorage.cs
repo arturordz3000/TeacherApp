@@ -17,27 +17,22 @@ namespace DataAccess
             this.properties = properties;
         }
 
-        public object Get(object query)
+        public object Get(string query)
         {
-            string key = (string)query;
-
-            if (properties.ContainsKey(key))
-                return properties[key];
+            if (properties.ContainsKey(query))
+                return properties[query];
             else return null;
         }
 
-        public void Save(params object[] obj)
+        public void Save(string key, object value)
         {
-            string key = (string)obj[0];
-            object value = obj[1];
-
             if (properties.ContainsKey(key))
                 properties[key] = value;
             else
                 properties.Add(key, value);
         }
 
-        public int Delete(object query)
+        public int Delete(string query)
         {
             throw new NotImplementedException();
         }

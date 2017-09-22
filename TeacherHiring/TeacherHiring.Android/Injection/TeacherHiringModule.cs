@@ -18,6 +18,10 @@ using Common.Alerts;
 using Common.Handlers;
 using Services.Users;
 using DataAccess.Sqlite;
+using DataAccess.Cache;
+using TeacherHiring.Droid.PathBuilder;
+using TeacherHiring.Views.Dashboard.Factory;
+using Services.Subjects;
 
 namespace TeacherHiring.Android.Injection
 {
@@ -36,12 +40,16 @@ namespace TeacherHiring.Android.Injection
             Bind<ITokenProvider>().To<TokenProvider>();
             Bind<IHttpClient>().To<RestClient>();
             Bind<EndpointResolver>().ToSelf().WithConstructorArgument("baseUrl", Common.Constants.ApiUrl);
-            Bind<ICacheStorage>().To<AppPropertiesStorage>().WithConstructorArgument("properties", appProperties);
+            Bind<ICacheStorage>().To<AppPropertiesStorage>().Named("AppProperties").WithConstructorArgument("properties", appProperties);
+            Bind<ICacheStorage>().To<SessionStorage>().Named("Session");
             Bind<IAlertDisplayer>().To<PageAlertDisplayer>();
             Bind<IAlertExceptionHandler>().To<AppExceptionHandler>();
             Bind<IUsersService>().To<UsersService>();
             Bind<IUnitOfWork>().To<SqliteUnitOfWork>().InSingletonScope();
             Bind<IContext>().To<SqliteContext>();
+            Bind<IPathBuilder>().To<StandardPathBuilder>();
+            Bind<IDetailPageFactory>().To<StandardDetailPageFactory>();
+            Bind<ISubjectsService>().To<SubjectsService>();
         }
     }
 }

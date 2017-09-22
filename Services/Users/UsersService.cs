@@ -51,9 +51,9 @@ namespace Services.Users
             return convertUserModelToUserDto(userModel);
         }
 
-        private bool userExists(UserDto user)
+        private bool isUserValid(UserDto user)
         {
-            return unitOfWork.UserDataRepository.FindBy(x => x.UserId == user.UserId).FirstOrDefault() != null;
+            return !string.IsNullOrEmpty(user.Name) && user.UserTypeId != 0;
         }
 
         private User convertUserDtoToUserModel(UserDto dto)
@@ -70,6 +70,11 @@ namespace Services.Users
             };
         }
 
+        private bool userExists(UserDto user)
+        {
+            return unitOfWork.UserDataRepository.FindBy(x => x.UserId == user.UserId).FirstOrDefault() != null;
+        }
+
         private UserDto convertUserModelToUserDto(User model)
         {
             return new UserDto
@@ -80,11 +85,6 @@ namespace Services.Users
                 UserCreatedOn = model.UserCreatedOn,
                 Token = model.Token
             };
-        }
-
-        private bool isUserValid(UserDto user)
-        {
-            return !string.IsNullOrEmpty(user.Name) && user.UserTypeId != 0;
         }
     }
 }

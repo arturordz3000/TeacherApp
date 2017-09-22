@@ -44,7 +44,10 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardPageMasterViewModel.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Sections\RegisterCounselPageViewModel.cs" />
     <Compile Include="Views\Dashboard\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
@@ -55,8 +58,19 @@
       <DependentUpon>DashboardPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboard\DashboardPageMenuItem.cs" />
+    <Compile Include="Views\Dashboard\Factory\StandardDetailPageFactory.cs" />
+    <Compile Include="Views\Dashboard\Factory\IDetailPageFactory.cs" />
     <Compile Include="Views\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sections\AcceptedCounselsPage.xaml.cs">
+      <DependentUpon>AcceptedCounselsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sections\ConfirmCounselPage.xaml.cs">
+      <DependentUpon>ConfirmCounselPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sections\RegisterCounselPage.xaml.cs">
+      <DependentUpon>RegisterCounselPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +143,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Dashboard\" />
+    <EmbeddedResource Include="Views\Sections\RegisterCounselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sections\ConfirmCounselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sections\AcceptedCounselsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

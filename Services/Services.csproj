@@ -49,6 +49,8 @@
     <Compile Include="Http\Implementations\IHttpClient.cs" />
     <Compile Include="Http\Implementations\IHttpClientResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subjects\ISubjectsService.cs" />
+    <Compile Include="Subjects\SubjectsService.cs" />
     <Compile Include="Users\IUsersService.cs" />
     <Compile Include="Users\UsersService.cs" />
   </ItemGroup>

@@ -32,9 +32,11 @@ namespace TeacherHiring.Views.Login
                 App.LogicContext.TokenProvider.SaveToken(accessToken);
 
                 UserDto user = await App.LogicContext.UsersService.GetUserData();
-                App.LogicContext.UsersService.SaveUserData(user);
 
-                App.Current.MainPage = new Dashboard.DashboardPage(user);
+                App.LogicContext.UsersService.SaveUserData(user);
+                App.LogicContext.SessionStorage.Save("CurrentUser", user);
+
+                App.Current.MainPage = new Dashboard.DashboardPage();
             }
             catch (Exception ex)
             {
