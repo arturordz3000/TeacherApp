@@ -8,8 +8,9 @@
     </ContentPage.BindingContext>
     <StackLayout
         VerticalOptions="CenterAndExpand">
-        <Entry Placeholder="Usuario" Text="{Binding User}" />
-        <Entry Placeholder="Password" Text="{Binding Password}" />
-        <Button Clicked="LoginButton_Clicked" Text="Iniciar Sesión" />
+        <Entry Placeholder="Usuario" Text="{Binding User}" IsVisible="{Binding InputsVisible}" />
+        <Entry Placeholder="Password" IsPassword="True" IsVisible="{Binding InputsVisible}" Text="{Binding Password}" />
+        <Button Clicked="LoginButton_Clicked" Text="Iniciar Sesión" IsVisible="{Binding InputsVisible}" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" />
     </StackLayout>
 </ContentPage>

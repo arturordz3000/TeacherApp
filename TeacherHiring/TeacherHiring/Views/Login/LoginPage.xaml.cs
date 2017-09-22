@@ -24,17 +24,12 @@ namespace TeacherHiring.Views.Login
 
         private async Task LoginButton_Clicked(object sender, EventArgs e)
         {
+            LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
+            loginViewModel.IsBusy = true;
+
             try
             {
-                LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
-                Token accessToken = await App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
-
-                App.LogicContext.TokenProvider.SaveToken(accessToken);
-
-                UserDto user = await App.LogicContext.UsersService.GetUserData();
-
-                App.LogicContext.UsersService.SaveUserData(user);
-                App.LogicContext.SessionStorage.Save("CurrentUser", user);
+                await startAuthenticationTask(loginViewModel);
 
                 App.Current.MainPage = new Dashboard.DashboardPage();
             }
@@ -42,6 +37,18 @@ namespace TeacherHiring.Views.Login
             {
                 App.LogicContext.ExceptionHandler.HandleException(this, ex);
             }
+            finally { loginViewModel.IsBusy = false; }            
+        }
+
+        private async Task startAuthenticationTask(LoginViewModel loginViewModel)
+        {
+            Token accessToken = await App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
+            App.LogicContext.TokenProvider.SaveToken(accessToken);
+
+            UserDto user = await App.LogicContext.UsersService.GetUserData();
+
+            App.LogicContext.UsersService.SaveUserData(user);
+            App.LogicContext.SessionStorage.Save("CurrentUser", user);
         }
     }
 }

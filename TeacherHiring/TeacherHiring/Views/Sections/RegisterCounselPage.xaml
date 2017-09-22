@@ -5,7 +5,7 @@
     <StackLayout Padding="10" Orientation="Vertical">
         <StackLayout Padding="10" Orientation="Horizontal">
             <Label Text="Materia" VerticalTextAlignment="Center"/>
-            <Picker ItemsSource="{Binding Subjects}" ItemDisplayBinding="{Binding Description}" Title="Selecciona una materia" />
+            <Picker ItemsSource="{Binding Subjects}" Title="Selecciona una materia" />
         </StackLayout>
     </StackLayout>
 </ContentPage>

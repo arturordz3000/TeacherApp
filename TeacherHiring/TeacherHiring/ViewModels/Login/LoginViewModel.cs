@@ -12,6 +12,7 @@ namespace TeacherHiring.ViewModels.Login
         private string user;
         private string password;
         private bool isTeacher;
+        private bool isBusy = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,6 +65,29 @@ namespace TeacherHiring.ViewModels.Login
             {
                 return isTeacher;
             }
+        }
+
+        public bool IsBusy
+        {
+            set
+            {
+                if (isBusy != value)
+                {
+                    isBusy = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsBusy"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InputsVisible"));
+                }
+            }
+
+            get
+            {
+                return isBusy;
+            }
+        }
+
+        public bool InputsVisible
+        {
+            get { return !isBusy; }
         }
     }
 }

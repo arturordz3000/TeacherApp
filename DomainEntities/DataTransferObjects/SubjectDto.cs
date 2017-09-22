@@ -20,7 +20,7 @@ namespace DomainEntities.DataTransferObjects
 
         public override string ToString()
         {
-            return Description + string.Format("({0} disponibles)", AvailableCounsels);
+            return Description + string.Format(" ({0} disponibles)", AvailableCounsels);
         }
     }
 }
