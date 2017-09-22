@@ -4,15 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeacherHiring.ViewModels.Implementations;
 
 namespace TeacherHiring.ViewModels.Dashboard
 {
-    public class DashboardViewModel : INotifyPropertyChanged
+    public class DashboardViewModel : BaseViewModel
     {
         private string userName;
         private int userType;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string UserName
         {
@@ -21,7 +20,7 @@ namespace TeacherHiring.ViewModels.Dashboard
                 if (userName != value)
                 {
                     userName = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UserName"));
+                    OnPropertyChanged("UserName");
                 }
             }
 
@@ -38,7 +37,7 @@ namespace TeacherHiring.ViewModels.Dashboard
                 if (userType != value)
                 {
                     userType = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UserType"));
+                    OnPropertyChanged("UserType");
                 }
             }
 

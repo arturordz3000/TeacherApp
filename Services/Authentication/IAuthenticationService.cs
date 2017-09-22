@@ -10,5 +10,6 @@ namespace Services.Authentication
     public interface IAuthenticationService
     {
         Task<Token> Authenticate(string user, string password);
+        bool ShouldAuthenticate();
     }
 }

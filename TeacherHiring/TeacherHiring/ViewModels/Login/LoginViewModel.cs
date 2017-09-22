@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using TeacherHiring.ViewModels.Implementations;
 
 namespace TeacherHiring.ViewModels.Login
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : AsyncViewModel
     {
         private string user;
         private string password;
         private bool isTeacher;
-        private bool isBusy = false;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string User
         {
@@ -23,7 +21,7 @@ namespace TeacherHiring.ViewModels.Login
                 if (user != value)
                 {
                     user = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("User"));
+                    OnPropertyChanged("User");
                 }
             }
 
@@ -40,7 +38,7 @@ namespace TeacherHiring.ViewModels.Login
                 if (password != value)
                 {
                     password = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Password"));
+                    OnPropertyChanged("Password");
                 }
             }
 
@@ -57,7 +55,7 @@ namespace TeacherHiring.ViewModels.Login
                 if (isTeacher != value)
                 {
                     isTeacher = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsTeacher"));
+                    OnPropertyChanged("IsTeacher");
                 }
             }
 
@@ -67,27 +65,14 @@ namespace TeacherHiring.ViewModels.Login
             }
         }
 
-        public bool IsBusy
-        {
-            set
-            {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsBusy"));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InputsVisible"));
-                }
-            }
-
-            get
-            {
-                return isBusy;
-            }
-        }
-
         public bool InputsVisible
         {
-            get { return !isBusy; }
+            get { return !IsBusy; }
+        }
+
+        public override void OnBusyChange()
+        {
+            OnPropertyChanged("InputsVisible");
         }
     }
 }

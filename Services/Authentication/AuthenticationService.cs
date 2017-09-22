@@ -9,6 +9,7 @@ using Services.Exceptions;
 using Services.Http.Resolvers;
 using Services.Http.Implementations;
 using Services.Authentication.Models;
+using Services.Authentication.Implementations;
 
 namespace Services.Authentication
 {
@@ -30,10 +31,7 @@ namespace Services.Authentication
 
             validateResponse(endpoint, response);
 
-            string accessValue = response.GetHeader("token");
-            int expirySeconds = int.Parse(response.GetHeader("tokenexpiry"));
-
-            return new Token { AccessValue = accessValue, ExpirySeconds = expirySeconds };
+            return createTokenFromResponse(response);
         }
 
         private void validateResponse(string endpoint, IHttpClientResponse response)
@@ -44,6 +42,29 @@ namespace Services.Authentication
                     throw new InvalidCredentialsException();
 
                 throw new RequestFailedException(endpoint);
+            }
+        }
+
+        private Token createTokenFromResponse(IHttpClientResponse response)
+        {
+            string accessValue = response.GetHeader("token");
+            int expirySeconds = int.Parse(response.GetHeader("tokenexpiry"));
+
+            return new Token { AccessValue = accessValue, ExpirySeconds = expirySeconds };
+        }
+
+        public bool ShouldAuthenticate()
+        {
+            try
+            {
+                ITokenProvider tokenProvider = httpClient.GetTokenProvider();
+                tokenProvider.GetToken();
+
+                return false;
+            }
+            catch (TokenExpiredException ex)
+            {
+                return true;
             }
         }
     }

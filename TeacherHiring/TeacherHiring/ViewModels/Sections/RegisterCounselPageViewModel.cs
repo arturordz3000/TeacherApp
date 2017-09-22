@@ -6,10 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TeacherHiring.ViewModels.Implementations;
 
 namespace TeacherHiring.ViewModels.Sections
 {
-    public class RegisterCounselPageViewModel : INotifyPropertyChanged
+    public class RegisterCounselPageViewModel : BaseViewModel
     {
         private SubjectDto[] subjects;
         private SubjectDto selectedSubject;
@@ -26,7 +27,7 @@ namespace TeacherHiring.ViewModels.Sections
                 if (subjects != value)
                 {
                     subjects = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Subjects"));
+                    OnPropertyChanged("Subjects");
                 }
             }
         }
@@ -42,11 +43,9 @@ namespace TeacherHiring.ViewModels.Sections
                 if (selectedSubject != value)
                 {
                     selectedSubject = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedSubject"));
+                    OnPropertyChanged("SelectedSubject");
                 }
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

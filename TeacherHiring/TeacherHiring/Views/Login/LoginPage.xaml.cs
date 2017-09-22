@@ -17,20 +17,21 @@ namespace TeacherHiring.Views.Login
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private LoginViewModel loginViewModel;
+
         public LoginPage()
         {
             InitializeComponent();
+            loginViewModel = (LoginViewModel)BindingContext;
         }
 
         private async Task LoginButton_Clicked(object sender, EventArgs e)
         {
-            LoginViewModel loginViewModel = (LoginViewModel)BindingContext;
-            loginViewModel.IsBusy = true;
-
             try
             {
-                await startAuthenticationTask(loginViewModel);
+                loginViewModel.IsBusy = true;
 
+                await startAuthenticationTask(loginViewModel);
                 App.Current.MainPage = new Dashboard.DashboardPage();
             }
             catch (Exception ex)
@@ -45,8 +46,33 @@ namespace TeacherHiring.Views.Login
             Token accessToken = await App.LogicContext.AuthenticationService.Authenticate(loginViewModel.User, loginViewModel.Password);
             App.LogicContext.TokenProvider.SaveToken(accessToken);
 
-            UserDto user = await App.LogicContext.UsersService.GetUserData();
+            await updateUserData();
+        }
 
+        protected async override void OnAppearing()
+        {
+            try
+            {
+                bool shouldAuthenticate = App.LogicContext.AuthenticationService.ShouldAuthenticate();
+
+                if (!shouldAuthenticate)
+                {
+                    loginViewModel.IsBusy = true;
+
+                    await updateUserData();
+                    App.Current.MainPage = new Dashboard.DashboardPage();
+                }
+            }
+            catch (Exception ex)
+            {
+                App.LogicContext.ExceptionHandler.HandleException(this, ex);
+            }
+            finally { loginViewModel.IsBusy = false; }
+        }
+
+        private async Task updateUserData()
+        {
+            UserDto user = await App.LogicContext.UsersService.GetUserData();
             App.LogicContext.UsersService.SaveUserData(user);
             App.LogicContext.SessionStorage.Save("CurrentUser", user);
         }
