@@ -23,7 +23,7 @@ namespace Services.Authentication.Providers
         public Token GetToken()
         {
             if (!tokenIsProvided())
-                return null;
+                throw new TokenExpiredException();
 
             Token token = new Token
             {
@@ -59,6 +59,16 @@ namespace Services.Authentication.Providers
             storage.Save("token", token.AccessValue);
             storage.Save("tokenexpiry", token.ExpirySeconds);
             storage.Save("tokendatetime", DateTime.Now);
+        }
+
+        public void DeleteToken()
+        {
+            if (tokenIsProvided())
+            {
+                storage.Delete("token");
+                storage.Delete("tokenexpiry");
+                storage.Delete("tokendatetime");
+            }
         }
     }
 }

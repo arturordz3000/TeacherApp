@@ -34,7 +34,10 @@ namespace DataAccess
 
         public int Delete(string query)
         {
-            throw new NotImplementedException();
+            if (properties.ContainsKey(query))
+                properties.Remove(query);
+
+            return 1;
         }
     }
 }

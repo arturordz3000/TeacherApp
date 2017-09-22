@@ -11,5 +11,6 @@ namespace Services.Authentication.Implementations
     {
         Token GetToken();
         void SaveToken(Token token);
+        void DeleteToken();
     }
 }

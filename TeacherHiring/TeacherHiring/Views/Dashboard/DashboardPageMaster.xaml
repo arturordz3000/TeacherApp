@@ -28,6 +28,9 @@
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>
+      <ListView.Footer>
+            <Button Text="Cerrar sesión" Clicked="LogoutButton_Clicked" />
+        </ListView.Footer>
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeacherHiring.ViewModels.Dashboard;
 using TeacherHiring.Views.Dashboard.Factory;
+using TeacherHiring.Views.Login;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,6 +28,12 @@ namespace TeacherHiring.Views.Dashboard
             IDetailPageFactory detailPageFactory = App.LogicContext.DetailPageFactory;
 
             BindingContext = new DashboardPageMasterViewModel(user, detailPageFactory);
+        }
+
+        private void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            App.LogicContext.AuthenticationService.Logout();
+            App.Current.MainPage = new LoginPage();
         }
     }
 }

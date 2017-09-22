@@ -53,6 +53,12 @@ namespace Services.Authentication
             return new Token { AccessValue = accessValue, ExpirySeconds = expirySeconds };
         }
 
+        public void Logout()
+        {
+            ITokenProvider tokenProvider = httpClient.GetTokenProvider();
+            tokenProvider.DeleteToken();
+        }
+
         public bool ShouldAuthenticate()
         {
             try
