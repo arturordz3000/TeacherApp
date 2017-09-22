@@ -18,11 +18,7 @@ namespace TeacherHiring.ViewModels.Login
         {
             set
             {
-                if (user != value)
-                {
-                    user = value;
-                    OnPropertyChanged("User");
-                }
+                OnPropertyChanged(ref user, ref value, "User");
             }
 
             get
@@ -35,11 +31,7 @@ namespace TeacherHiring.ViewModels.Login
         {
             set
             {
-                if (password != value)
-                {
-                    password = value;
-                    OnPropertyChanged("Password");
-                }
+                OnPropertyChanged(ref password, ref value, "Password");
             }
 
             get
@@ -52,11 +44,7 @@ namespace TeacherHiring.ViewModels.Login
         {
             set
             {
-                if (isTeacher != value)
-                {
-                    isTeacher = value;
-                    OnPropertyChanged("IsTeacher");
-                }
+                OnPropertyChanged(ref isTeacher, ref value, "IsTeacher");
             }
 
             get

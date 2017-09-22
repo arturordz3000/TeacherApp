@@ -15,12 +15,8 @@ namespace TeacherHiring.ViewModels.Implementations
         {
             set
             {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                    OnBusyChange();
-                }
+                OnPropertyChanged(ref isBusy, ref value, "IsBusy");
+                OnBusyChange();
             }
 
             get

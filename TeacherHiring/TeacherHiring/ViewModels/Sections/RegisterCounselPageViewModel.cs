@@ -14,6 +14,8 @@ namespace TeacherHiring.ViewModels.Sections
     {
         private SubjectDto[] subjects;
         private SubjectDto selectedSubject;
+        private DateTime counselDate;
+        private TimeSpan counselTime;
 
         public SubjectDto[] Subjects
         {
@@ -31,6 +33,7 @@ namespace TeacherHiring.ViewModels.Sections
                 }
             }
         }
+
         public SubjectDto SelectedSubject
         {
             get
@@ -45,6 +48,19 @@ namespace TeacherHiring.ViewModels.Sections
                     selectedSubject = value;
                     OnPropertyChanged("SelectedSubject");
                 }
+            }
+        }
+
+        public DateTime CounselDate
+        {
+            get
+            {
+                return counselDate;
+            }
+
+            set
+            {
+
             }
         }
     }

@@ -17,11 +17,7 @@ namespace TeacherHiring.ViewModels.Dashboard
         {
             set
             {
-                if (userName != value)
-                {
-                    userName = value;
-                    OnPropertyChanged("UserName");
-                }
+                OnPropertyChanged(ref userName, ref value, "UserName");
             }
 
             get
@@ -34,11 +30,7 @@ namespace TeacherHiring.ViewModels.Dashboard
         {
             set
             {
-                if (userType != value)
-                {
-                    userType = value;
-                    OnPropertyChanged("UserType");
-                }
+                OnPropertyChanged(ref userType, ref value, "UserType");
             }
 
             get

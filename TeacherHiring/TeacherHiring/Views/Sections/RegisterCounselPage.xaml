@@ -7,5 +7,13 @@
             <Label Text="Materia" VerticalTextAlignment="Center"/>
             <Picker ItemsSource="{Binding Subjects}" Title="Selecciona una materia" />
         </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Fecha" VerticalTextAlignment="Center"/>
+            <DatePicker Date="{Binding CounselDate}" />
+        </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Hora" VerticalTextAlignment="Center"/>
+            <TimePicker Time="{Binding CounselTime}" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
