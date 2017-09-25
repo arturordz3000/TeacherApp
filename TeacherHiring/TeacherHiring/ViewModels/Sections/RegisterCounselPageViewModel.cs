@@ -14,8 +14,8 @@ namespace TeacherHiring.ViewModels.Sections
     {
         private SubjectDto[] subjects;
         private SubjectDto selectedSubject;
-        private DateTime counselDate;
-        private TimeSpan counselTime;
+        private DateTime counselDate = DateTime.Now;
+        private TimeSpan counselTime = DateTime.Now.TimeOfDay;
 
         public SubjectDto[] Subjects
         {
@@ -26,11 +26,7 @@ namespace TeacherHiring.ViewModels.Sections
 
             set
             {
-                if (subjects != value)
-                {
-                    subjects = value;
-                    OnPropertyChanged("Subjects");
-                }
+                OnPropertyChanged(ref subjects, ref value, "Subjects");
             }
         }
 
@@ -43,11 +39,7 @@ namespace TeacherHiring.ViewModels.Sections
 
             set
             {
-                if (selectedSubject != value)
-                {
-                    selectedSubject = value;
-                    OnPropertyChanged("SelectedSubject");
-                }
+                OnPropertyChanged(ref selectedSubject, ref value, "SelectedSubject");
             }
         }
 
@@ -60,7 +52,7 @@ namespace TeacherHiring.ViewModels.Sections
 
             set
             {
-
+                OnPropertyChanged(ref counselDate, ref value, "CounselDate");
             }
         }
     }

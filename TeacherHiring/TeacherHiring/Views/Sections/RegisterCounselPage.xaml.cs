@@ -1,4 +1,5 @@
-﻿using DomainEntities.DataTransferObjects;
+﻿using Common.Handlers;
+using DomainEntities.DataTransferObjects;
 using Services.Subjects;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,15 @@ namespace TeacherHiring.Views.Sections
     public partial class RegisterCounselPage : ContentPage
     {
         private ISubjectsService subjectsService;
+        private IExceptionHandler exceptionHandler;
         private RegisterCounselPageViewModel viewModel;
 
         public RegisterCounselPage()
         {
             InitializeComponent();
+
             subjectsService = App.LogicContext.SubjectsService;
+            exceptionHandler = App.LogicContext.ExceptionHandler;
             viewModel = new RegisterCounselPageViewModel { Subjects = new SubjectDto[] { } };
 
             BindingContext = viewModel;
@@ -28,7 +32,20 @@ namespace TeacherHiring.Views.Sections
 
         protected override async void OnAppearing()
         {
-            await updateBindings();
+            try
+            {
+                initializeCustomControls();
+                await updateBindings();
+            }
+            catch (Exception ex)
+            {
+                exceptionHandler.HandleException(this, ex);
+            }
+        }
+
+        private void initializeCustomControls()
+        {
+            CounselMap.Initialize();
         }
 
         private async Task updateBindings()

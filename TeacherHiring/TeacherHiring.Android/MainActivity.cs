@@ -19,8 +19,9 @@ namespace TeacherHiring.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(bundle);
+            Xamarin.FormsMaps.Init(this, bundle);
 
+            base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             App app = new App();
