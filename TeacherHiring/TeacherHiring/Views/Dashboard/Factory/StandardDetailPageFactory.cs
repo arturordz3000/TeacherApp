@@ -14,7 +14,7 @@ namespace TeacherHiring.Views.Dashboard.Factory
         public StandardDetailPageFactory()
         {
             // Student Detail Pages
-            targetTypes.Add("Solicitar Asesoría", typeof(DashboardPageDetail));
+            targetTypes.Add("Solicitar Asesoría", typeof(RequestCounselPage));
             targetTypes.Add("Solicitudes Realizadas", typeof(DashboardPageDetail));
 
             // Teacher detail pages

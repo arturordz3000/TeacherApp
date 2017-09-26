@@ -27,5 +27,13 @@ namespace Services.Counsels
 
             return clientResponse.GetContentAsObject<CounselDto>();
         }
+
+        public async Task<CounselDto[]> GetAvailableCounselsBySubject(SubjectDto subject)
+        {
+            string endpoint = endpointResolver.ResolveUrl("GetListProfesorMateriaApp", "AlumnoMateria") + "?idMateria=" + subject.SubjectId;
+            IHttpClientResponse clientResponse = await httpClient.Get(endpoint);
+
+            return clientResponse.GetContentAsObject<CounselDto[]>();
+        }
     }
 }

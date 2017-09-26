@@ -32,5 +32,10 @@ namespace DomainEntities.DataTransferObjects
 
         [JsonProperty("NombreProfesor")]
         public string TeacherName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} - {1}", TeacherName, CounselDateTime.ToString("dd/mm/yyyy hh:mm"));
+        }
     }
 }

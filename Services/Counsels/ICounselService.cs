@@ -10,5 +10,6 @@ namespace Services.Counsels
     public interface ICounselService
     {
         Task<CounselDto> RegisterCounsel(CounselDto counsel);
+        Task<CounselDto[]> GetAvailableCounselsBySubject(SubjectDto subject);
     }
 }

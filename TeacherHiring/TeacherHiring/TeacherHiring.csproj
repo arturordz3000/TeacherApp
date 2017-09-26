@@ -50,7 +50,10 @@
     <Compile Include="ViewModels\Implementations\AsyncViewModel.cs" />
     <Compile Include="ViewModels\Implementations\BaseViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Sections\AvailableCounselsPageViewModel.cs" />
+    <Compile Include="ViewModels\Sections\CounselSignupPageViewModel.cs" />
     <Compile Include="ViewModels\Sections\RegisterCounselPageViewModel.cs" />
+    <Compile Include="ViewModels\Sections\RequestCounselPageViewModel.cs" />
     <Compile Include="Views\Dashboard\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
@@ -69,11 +72,20 @@
     <Compile Include="Views\Sections\AcceptedCounselsPage.xaml.cs">
       <DependentUpon>AcceptedCounselsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Sections\AvailableCounselsPage.xaml.cs">
+      <DependentUpon>AvailableCounselsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sections\ConfirmCounselPage.xaml.cs">
       <DependentUpon>ConfirmCounselPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Sections\CounselSignupPage.xaml.cs">
+      <DependentUpon>CounselSignupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sections\RegisterCounselPage.xaml.cs">
       <DependentUpon>RegisterCounselPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sections\RequestCounselPage.xaml.cs">
+      <DependentUpon>RequestCounselPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +174,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Sections\AcceptedCounselsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sections\RequestCounselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sections\AvailableCounselsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sections\CounselSignupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
