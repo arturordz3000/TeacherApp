@@ -22,6 +22,7 @@ using DataAccess.Cache;
 using TeacherHiring.Droid.PathBuilder;
 using TeacherHiring.Views.Dashboard.Factory;
 using Services.Subjects;
+using Services.Counsels;
 
 namespace TeacherHiring.Android.Injection
 {
@@ -50,6 +51,7 @@ namespace TeacherHiring.Android.Injection
             Bind<IPathBuilder>().To<StandardPathBuilder>();
             Bind<IDetailPageFactory>().To<StandardDetailPageFactory>();
             Bind<ISubjectsService>().To<SubjectsService>();
+            Bind<ICounselService>().To<CounselService>();
         }
     }
 }

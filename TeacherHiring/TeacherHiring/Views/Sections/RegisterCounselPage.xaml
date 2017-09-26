@@ -7,7 +7,7 @@
     <StackLayout Padding="10" Orientation="Vertical">
         <StackLayout Padding="10" Orientation="Horizontal">
             <Label Text="Materia" VerticalTextAlignment="Center"/>
-            <Picker ItemsSource="{Binding Subjects}" Title="Selecciona una materia" />
+            <Picker ItemsSource="{Binding Subjects}" SelectedItem="{Binding SelectedSubject}" Title="Selecciona una materia" />
         </StackLayout>
         <StackLayout Padding="10" Orientation="Horizontal">
             <Label Text="Fecha" VerticalTextAlignment="Center"/>
@@ -16,12 +16,12 @@
         <StackLayout Padding="10" Orientation="Horizontal">
             <Label Text="Hora" VerticalTextAlignment="Center"/>
             <TimePicker Time="{Binding CounselTime}" />
+            <Button Clicked="SaveButton_Clicked" Text="Guardar" HorizontalOptions="EndAndExpand" IsVisible="{Binding InputsVisible}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
         </StackLayout>
-        <!--<maps:Map WidthRequest="320" HeightRequest="200"
-            x:Name="CounselMap"
-            IsShowingUser="true"
-            MapType="Hybrid" />-->
-        <custom:CenteredPinMap WidthRequest="320" HeightRequest="200"
+        <custom:CenteredPinMap
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
             x:Name="CounselMap"
             IsShowingUser="true"
             MapType="Hybrid" />

@@ -1,7 +1,9 @@
-﻿using Common.Handlers;
+﻿using Common.Alerts;
+using Common.Handlers;
 using DataAccess.Implementations;
 using Services.Authentication;
 using Services.Authentication.Implementations;
+using Services.Counsels;
 using Services.Exceptions;
 using Services.Subjects;
 using Services.Users;
@@ -26,6 +28,8 @@ namespace TeacherHiring.Facades
         private ICacheStorage sessionStorage;
         private IDetailPageFactory detailPageFactory;
         private ISubjectsService subjectsService;
+        private ICounselService counselService;
+        private IAlertDisplayer alertDisplayer;
 
         public AppFacade(IDependencyResolver dependencyResolver)
         {
@@ -114,6 +118,28 @@ namespace TeacherHiring.Facades
                     subjectsService = dependencyResolver.Resolve<ISubjectsService>();
 
                 return subjectsService;
+            }
+        }
+
+        public ICounselService CounselService
+        {
+            get
+            {
+                if (counselService == null)
+                    counselService = dependencyResolver.Resolve<ICounselService>();
+
+                return counselService;
+            }
+        }
+
+        public IAlertDisplayer AlertDisplayer
+        {
+            get
+            {
+                if (alertDisplayer == null)
+                    alertDisplayer = dependencyResolver.Resolve<IAlertDisplayer>();
+
+                return alertDisplayer;
             }
         }
     }

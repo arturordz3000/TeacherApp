@@ -10,7 +10,7 @@ using TeacherHiring.ViewModels.Implementations;
 
 namespace TeacherHiring.ViewModels.Sections
 {
-    public class RegisterCounselPageViewModel : BaseViewModel
+    public class RegisterCounselPageViewModel : AsyncViewModel
     {
         private SubjectDto[] subjects;
         private SubjectDto selectedSubject;
@@ -54,6 +54,32 @@ namespace TeacherHiring.ViewModels.Sections
             {
                 OnPropertyChanged(ref counselDate, ref value, "CounselDate");
             }
+        }
+
+        public TimeSpan CounselTime
+        {
+            get
+            {
+                return counselTime;
+            }
+
+            set
+            {
+                OnPropertyChanged(ref counselTime, ref value, "CounselTime");
+            }
+        }
+
+        public bool InputsVisible
+        {
+            get
+            {
+                return !IsBusy;
+            }
+        }
+
+        public override void OnBusyChange()
+        {
+            OnPropertyChanged("InputsVisible");
         }
     }
 }

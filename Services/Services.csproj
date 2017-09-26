@@ -40,6 +40,8 @@
     <Compile Include="Authentication\Implementations\ITokenProvider.cs" />
     <Compile Include="Authentication\Models\Token.cs" />
     <Compile Include="Authentication\Providers\TokenProvider.cs" />
+    <Compile Include="Counsels\CounselService.cs" />
+    <Compile Include="Counsels\ICounselService.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\RequestFailedException.cs" />
     <Compile Include="Exceptions\TokenExpiredException.cs" />
