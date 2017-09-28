@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Services.Authentication.Implementations;
 using Services.Authentication.Models;
+using Services.Exceptions;
 using Services.Http.Implementations;
 using Services.Http.Responses;
 using System;
@@ -42,6 +43,7 @@ namespace Services.Http.Clients
                 request.Headers.Add("Token", tokenProvider.GetToken().AccessValue);
 
             HttpResponseMessage message = await client.SendAsync(request);
+            validateResponse(message, endpoint);
 
             return buildResponse(message);
         }
@@ -54,6 +56,7 @@ namespace Services.Http.Clients
 
             HttpContent content = buildContent(token, json);
             HttpResponseMessage message = await client.PostAsync(endpoint, content);
+            validateResponse(message, endpoint);
 
             return buildResponse(message);
         }
@@ -77,6 +80,12 @@ namespace Services.Http.Clients
                 headers.Add(h.Key.ToLower(), h.Value.FirstOrDefault());
 
             return new HttpClientResponse(jsonResult, headers, message.IsSuccessStatusCode);
+        }
+
+        private void validateResponse(HttpResponseMessage response, string endpoint)
+        {
+            if (!response.IsSuccessStatusCode)
+                throw new RequestFailedException(endpoint);
         }
 
         public ITokenProvider GetTokenProvider()

@@ -73,6 +73,7 @@ namespace TeacherHiring.Facades
         {
             IAlertExceptionHandler exceptionHandler = dependencyResolver.Resolve<IAlertExceptionHandler>();
             exceptionHandler.RegisterExceptionType(typeof(InvalidCredentialsException), "Tu nombre de usuario o contraseña son incorrectos.");
+            exceptionHandler.RegisterExceptionType(typeof(RequestFailedException), "Ha ocurrido un problema con la solicitud. Inténtalo de nuevo.");
 
             return exceptionHandler;
         }

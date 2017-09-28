@@ -1,5 +1,7 @@
-﻿using Common.Handlers;
+﻿using Common.Alerts;
+using Common.Handlers;
 using DomainEntities.DataTransferObjects;
+using Services.Counsels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,8 @@ namespace TeacherHiring.Views.Sections
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CounselSignupPage : ContentPage
     {
+        private ICounselService counselService;
+        private IAlertDisplayer alertDisplayer;
         private IExceptionHandler exceptionHandler;
         private CounselSignupPageViewModel counselSignupViewModel;
 
@@ -22,6 +26,8 @@ namespace TeacherHiring.Views.Sections
         {
             InitializeComponent();
 
+            counselService = App.LogicContext.CounselService;
+            alertDisplayer = App.LogicContext.AlertDisplayer;
             exceptionHandler = App.LogicContext.ExceptionHandler;
             counselSignupViewModel = new CounselSignupPageViewModel { Counsel = counsel };
 
@@ -56,6 +62,28 @@ namespace TeacherHiring.Views.Sections
 
             CounselMap.MoveToRegion(MapSpan.FromCenterAndRadius(center, distance));
             CounselMap.Pins.Add(pin);
+        }
+
+        private async Task RequestButton_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                counselSignupViewModel.IsBusy = true;
+
+                UserDto user = (UserDto)App.LogicContext.SessionStorage.Get("CurrentUser");
+                StudentCounselDto studentCounsel = await counselService.SignupToCounsel(user, counselSignupViewModel.Counsel);
+
+                if (studentCounsel != null)
+                {
+                    await alertDisplayer.DisplayAlert(this, "Asesoría", "Solicitud exitosa!", "Ok");
+                    App.Current.MainPage = new Dashboard.DashboardPage();
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionHandler.HandleException(this, ex);
+            }
+            finally { counselSignupViewModel.IsBusy = false; }
         }
     }
 }

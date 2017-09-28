@@ -11,5 +11,6 @@ namespace Services.Counsels
     {
         Task<CounselDto> RegisterCounsel(CounselDto counsel);
         Task<CounselDto[]> GetAvailableCounselsBySubject(SubjectDto subject);
+        Task<StudentCounselDto> SignupToCounsel(UserDto student, CounselDto counsel);
     }
 }

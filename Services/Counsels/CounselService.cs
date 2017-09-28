@@ -35,5 +35,15 @@ namespace Services.Counsels
 
             return clientResponse.GetContentAsObject<CounselDto[]>();
         }
+
+        public async Task<StudentCounselDto> SignupToCounsel(UserDto student, CounselDto counsel)
+        {
+            string endpoint = endpointResolver.ResolveUrl("InsProfesorMateriaApp", "AlumnoMateria")
+                + "?idAlumno=" + student.UserId + "&idProfesorMateria=" + counsel.TeacherSubjectId;
+
+            IHttpClientResponse clientResponse = await httpClient.Post(endpoint, new { });
+
+            return clientResponse.GetContentAsObject<StudentCounselDto>();
+        }
     }
 }

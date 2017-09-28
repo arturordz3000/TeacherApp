@@ -18,6 +18,7 @@
             x:Name="CounselMap"
             IsShowingUser="true"
             MapType="Hybrid" />
-        <Button Text="Solicitar Asesoría" />
+        <Button Text="Solicitar Asesoría" Clicked="RequestButton_Clicked" IsVisible="{Binding InputsVisible}" />
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
     </StackLayout>
 </ContentPage>
