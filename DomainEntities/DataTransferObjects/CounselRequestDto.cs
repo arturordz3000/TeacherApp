@@ -12,7 +12,7 @@ namespace DomainEntities.DataTransferObjects
         [JsonProperty("IdAlumnoMateria")]
         public int StudentSubjectId { get; set; }
 
-        [JsonProperty("IdProfesorMateria")]
+        [JsonProperty("IdProfesoMateria")]
         public int TeacherSubjectId { get; set; }
 
         [JsonProperty("IdAlumno")]
@@ -43,7 +43,7 @@ namespace DomainEntities.DataTransferObjects
         public double Longitude { get; set; }
 
         [JsonProperty("Aceptada")]
-        public bool IsConfirmed { get; set; }
+        public bool IsAccepted { get; set; }
 
         public override string ToString()
         {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeacherHiring.ViewModels.Implementations;
 
 namespace TeacherHiring.ViewModels.Sections
 {
-    public class CounselRequestDetailPageViewModel
+    public class CounselRequestDetailPageViewModel : AsyncViewModel
     {
         private string subjectName;
         private DateTime counselDateTime;
@@ -38,6 +39,11 @@ namespace TeacherHiring.ViewModels.Sections
         {
             get { return studentName; }
             set { studentName = value; }
+        }
+
+        public override void OnBusyChange()
+        {
+            OnPropertyChanged("InputsVisible");
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Common.Handlers;
+﻿using Common.Alerts;
+using Common.Handlers;
 using DomainEntities.DataTransferObjects;
+using Services.Counsels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +20,18 @@ namespace TeacherHiring.Views.Sections
     {
         private CounselRequestDto counselRequest;
         private CounselRequestDetailPageViewModel counselRequestDetailViewModel;
+        private ICounselService counselService;
         private IMapInitializer mapInitializer;
+        private IAlertDisplayer alertDisplayer;
         private IExceptionHandler exceptionHandler;
 
         public CounselRequestDetailPage(CounselRequestDto counselRequest)
         {
             InitializeComponent();
 
+            counselService = App.LogicContext.CounselService;
             mapInitializer = App.LogicContext.MapInitializer;
+            alertDisplayer = App.LogicContext.AlertDisplayer;
             exceptionHandler = App.LogicContext.ExceptionHandler;
             this.counselRequest = counselRequest;
 
@@ -50,6 +56,27 @@ namespace TeacherHiring.Views.Sections
             {
                 exceptionHandler.HandleException(this, ex);
             }
+        }
+
+        private async Task AcceptButton_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                counselRequestDetailViewModel.IsBusy = true;
+
+                CounselRequestDto responseCounselRequest = await counselService.AcceptCounselRequest(counselRequest);
+
+                if (responseCounselRequest != null)
+                {
+                    await alertDisplayer.DisplayAlert(this, "Asesoría", "Confirmación exitosa!", "Ok");
+                    App.Current.MainPage = new Dashboard.DashboardPage();
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionHandler.HandleException(this, ex);
+            }
+            finally { counselRequestDetailViewModel.IsBusy = false; }
         }
     }
 }

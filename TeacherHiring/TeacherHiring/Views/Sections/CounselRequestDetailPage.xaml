@@ -26,5 +26,7 @@
             x:Name="CounselMap"
             IsShowingUser="true"
             MapType="Hybrid" />
+        <Button Text="Confirmar Asesoría" Clicked="AcceptButton_Clicked" IsVisible="{Binding InputsVisible}" />
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
     </StackLayout>
 </ContentPage>

@@ -46,14 +46,24 @@ namespace Services.Counsels
             return clientResponse.GetContentAsObject<StudentCounselDto>();
         }
 
-        public async Task<CounselRequestDto[]> GetCounselRequestsForTeacher(UserDto teacherUser, bool confirmedRequests)
+        public async Task<CounselRequestDto[]> GetCounselRequestsForTeacher(UserDto teacherUser, bool acceptedRequests)
         {
             string endpoint = endpointResolver.ResolveUrl("GetListProfesorMateriaApps", "ProfesorMateria") 
-                + "?idProfesor=" + teacherUser.UserId + "&aceptada=" + (confirmedRequests ? "true" : "false");
+                + "?idProfesor=" + teacherUser.UserId + "&aceptada=" + (acceptedRequests ? "true" : "false");
 
             IHttpClientResponse clientResponse = await httpClient.Get(endpoint);
 
             return clientResponse.GetContentAsObject<CounselRequestDto[]>();
+        }
+
+        public async Task<CounselRequestDto> AcceptCounselRequest(CounselRequestDto counselRequest)
+        {
+            string endpoint = endpointResolver.ResolveUrl("SolicitarProfesorMateriaApp", "ProfesorMateria")
+                + "?idProfesor=" + counselRequest.TeacherId + "&idProfesorMateria=" + counselRequest.TeacherSubjectId;
+
+            IHttpClientResponse clientResponse = await httpClient.Post(endpoint, new { });
+
+            return clientResponse.GetContentAsObject<CounselRequestDto>();
         }
     }
 }
