@@ -1,4 +1,5 @@
-﻿using Common.Handlers;
+﻿using Common.Enums;
+using Common.Handlers;
 using DomainEntities.DataTransferObjects;
 using Services.Counsels;
 using System;
@@ -13,18 +14,20 @@ using Xamarin.Forms.Xaml;
 namespace TeacherHiring.Views.Sections
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UnConfirmedCounselListPage : ContentPage
+    public partial class CounselRequestsListPage : ContentPage
     {
         private SubjectDto subject;
         private ICounselService counselsService;
         private IExceptionHandler exceptionHandler;
         private ConfirmCounselListPageViewModel confirmCounselListViewModel;
+        private bool showAcceptedRequests;
 
-        public UnConfirmedCounselListPage(SubjectDto subject)
+        public CounselRequestsListPage(SubjectDto subject, bool showAcceptedRequests)
         {
             InitializeComponent();
-
+            
             this.subject = subject;
+            this.showAcceptedRequests = showAcceptedRequests;
             counselsService = App.LogicContext.CounselService;
             exceptionHandler = App.LogicContext.ExceptionHandler;
             confirmCounselListViewModel = new ConfirmCounselListPageViewModel
@@ -32,7 +35,7 @@ namespace TeacherHiring.Views.Sections
                 CounselRequests = new CounselRequestDto[] { }
             };
 
-            Title = "Solicitudes para " + subject.Description;
+            Title = subject != null ? "Solicitudes para " + subject.Description : "Solicitudes realizadas";
             BindingContext = confirmCounselListViewModel;
         }
 
@@ -51,13 +54,24 @@ namespace TeacherHiring.Views.Sections
         private async Task updateBindings()
         {
             UserDto currentUser = (UserDto)App.LogicContext.SessionStorage.Get("CurrentUser");
-            CounselRequestDto[] counselRequests = await counselsService.GetCounselRequestsForTeacher(currentUser, false);
-            confirmCounselListViewModel.CounselRequests = counselRequests.Where(x => x.SubjectId == subject.SubjectId).ToArray();
+
+            CounselRequestDto[] counselRequests = null;
+
+            if (currentUser.UserTypeId == (int)UserType.Teacher)
+            {
+                counselRequests = await counselsService.GetCounselRequestsForTeacher(currentUser, showAcceptedRequests);
+                confirmCounselListViewModel.CounselRequests = counselRequests.Where(x => x.SubjectId == subject.SubjectId).ToArray();
+            }
+            else
+            {
+                counselRequests = await counselsService.GetCounselRequestsForStudent(currentUser);
+                confirmCounselListViewModel.CounselRequests = counselRequests;
+            }
         }
 
         private async void CounselsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            await Navigation.PushAsync(new CounselRequestDetailPage(confirmCounselListViewModel.SelectedCounselRequest));
+            await Navigation.PushAsync(new CounselRequestDetailPage(confirmCounselListViewModel.SelectedCounselRequest, showAcceptedRequests));
         }
     }
 }

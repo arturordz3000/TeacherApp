@@ -12,6 +12,8 @@ namespace TeacherHiring.ViewModels.Sections
         private string subjectName;
         private DateTime counselDateTime;
         private string studentName;
+        private string teacherName;
+        private bool isConfirmationDetail = false;
 
         public string SubjectName
         {
@@ -39,6 +41,18 @@ namespace TeacherHiring.ViewModels.Sections
         {
             get { return studentName; }
             set { studentName = value; }
+        }
+
+        public string TeacherName
+        {
+            get { return teacherName; }
+            set { teacherName = value; }
+        }
+
+        public bool IsConfirmationDetail
+        {
+            get { return isConfirmationDetail; }
+            set { OnPropertyChanged(ref isConfirmationDetail, ref value, "IsConfirmationDetail"); }
         }
 
         public override void OnBusyChange()

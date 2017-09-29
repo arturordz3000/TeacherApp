@@ -82,8 +82,8 @@
     </Compile>
     <Compile Include="Views\Sections\Initializers\IMapInitializer.cs" />
     <Compile Include="Views\Sections\Initializers\MapWithPinInitializer.cs" />
-    <Compile Include="Views\Sections\UnConfirmedCounselListPage.xaml.cs">
-      <DependentUpon>UnConfirmedCounselListPage.xaml</DependentUpon>
+    <Compile Include="Views\Sections\CounselRequestsListPage.xaml.cs">
+      <DependentUpon>CounselRequestsListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Sections\CounselSignupPage.xaml.cs">
       <DependentUpon>CounselSignupPage.xaml</DependentUpon>
@@ -177,7 +177,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Sections\UnConfirmedCounselListPage.xaml">
+    <EmbeddedResource Include="Views\Sections\CounselRequestsListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

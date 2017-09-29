@@ -9,6 +9,6 @@ namespace TeacherHiring.Views.Sections.PageInstantiators
 {
     public interface IPageInstatiator
     {
-        Page Instantiate(object parameters);
+        Page Instantiate(params object[] parameters);
     }
 }

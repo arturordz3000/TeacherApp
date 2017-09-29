@@ -10,9 +10,9 @@ namespace TeacherHiring.Views.Sections.PageInstantiators
 {
     public class AvailableCounselsPageInstantiator : IPageInstatiator
     {
-        public Page Instantiate(object parameters)
+        public Page Instantiate(params object[] parameters)
         {
-            return new AvailableCounselsPage((SubjectDto)parameters);
+            return new AvailableCounselsPage((SubjectDto)parameters[0]);
         }
     }
 }

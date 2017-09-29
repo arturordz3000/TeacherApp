@@ -10,9 +10,17 @@ namespace TeacherHiring.Views.Sections.PageInstantiators
 {
     public class UnConfirmCounselListPageInstantiator : IPageInstatiator
     {
-        public Page Instantiate(object parameters)
+        private bool showAcceptedRequests;
+
+        public UnConfirmCounselListPageInstantiator(bool showAcceptedRequests)
         {
-            return new UnConfirmedCounselListPage((SubjectDto)parameters);
+            this.showAcceptedRequests = showAcceptedRequests;
+        }
+
+        public Page Instantiate(params object[] parameters)
+        {
+            SubjectDto subject = (SubjectDto)parameters[0];
+            return new CounselRequestsListPage(subject, showAcceptedRequests);
         }
     }
 }

@@ -17,12 +17,13 @@ namespace TeacherHiring.Views.Dashboard.Factory
         {
             // Student Detail Pages
             targetTypes.Add("Solicitar Asesoría", new SubjectsListPage(new AvailableCounselsPageInstantiator()));
-            targetTypes.Add("Solicitudes Realizadas", new DashboardPageDetail());
+            //targetTypes.Add("Solicitudes Realizadas", new DashboardPageDetail());
+            targetTypes.Add("Solicitudes Realizadas", new CounselRequestsListPage(null, true));
 
             // Teacher detail pages
             targetTypes.Add("Registrar Asesoría", new RegisterCounselPage());
-            targetTypes.Add("Confirmar Asesoría", new SubjectsListPage(new UnConfirmCounselListPageInstantiator()));
-            targetTypes.Add("Asesorías Aceptadas", new AcceptedCounselsPage());
+            targetTypes.Add("Confirmar Asesoría", new SubjectsListPage(new UnConfirmCounselListPageInstantiator(false)));
+            targetTypes.Add("Asesorías Aceptadas", new SubjectsListPage(new UnConfirmCounselListPageInstantiator(true)));
         }
 
         public DashboardPageMenuItem CreateMenuItem(int id, string title)

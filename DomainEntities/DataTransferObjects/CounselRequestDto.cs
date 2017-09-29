@@ -47,7 +47,7 @@ namespace DomainEntities.DataTransferObjects
 
         public override string ToString()
         {
-            return string.Format("Solicitada por: {0} - {1}", StudentName, CounselDateTime.ToString("dd/MM/yyyy hh:mm"));
+            return string.Format("{0} - Solicitada por: {1}", SubjectName, StudentName);
         }
     }
 }

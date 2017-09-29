@@ -25,7 +25,7 @@ namespace TeacherHiring.Views.Sections
         private IAlertDisplayer alertDisplayer;
         private IExceptionHandler exceptionHandler;
 
-        public CounselRequestDetailPage(CounselRequestDto counselRequest)
+        public CounselRequestDetailPage(CounselRequestDto counselRequest, bool isDisplayOnly = false)
         {
             InitializeComponent();
 
@@ -39,7 +39,9 @@ namespace TeacherHiring.Views.Sections
             {
                 SubjectName = counselRequest.SubjectName,
                 StudentName = counselRequest.StudentName,
-                CounselDateTime = counselRequest.CounselDateTime
+                TeacherName = counselRequest.TeacherName,
+                CounselDateTime = counselRequest.CounselDateTime,
+                IsConfirmationDetail = !isDisplayOnly
             };
 
             Title = counselRequest.ToString();

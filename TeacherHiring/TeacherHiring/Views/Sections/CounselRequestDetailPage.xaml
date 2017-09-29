@@ -20,13 +20,19 @@
             <Label Text="Alumno: " VerticalTextAlignment="Center"/>
             <Label Text="{Binding StudentName}" VerticalTextAlignment="Center"/>
         </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Profesor: " VerticalTextAlignment="Center"/>
+            <Label Text="{Binding TeacherName}" VerticalTextAlignment="Center"/>
+        </StackLayout>
         <maps:Map
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             x:Name="CounselMap"
             IsShowingUser="true"
             MapType="Hybrid" />
-        <Button Text="Confirmar Asesoría" Clicked="AcceptButton_Clicked" IsVisible="{Binding InputsVisible}" />
-        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
+        <StackLayout IsVisible="{Binding IsConfirmationDetail}">
+            <Button Text="Confirmar Asesoría" Clicked="AcceptButton_Clicked" IsVisible="{Binding InputsVisible}" />
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" HorizontalOptions="EndAndExpand" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
