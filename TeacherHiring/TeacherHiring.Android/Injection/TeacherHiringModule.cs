@@ -23,6 +23,7 @@ using TeacherHiring.Droid.PathBuilder;
 using TeacherHiring.Views.Dashboard.Factory;
 using Services.Subjects;
 using Services.Counsels;
+using TeacherHiring.Views.Sections.Initializers;
 
 namespace TeacherHiring.Android.Injection
 {
@@ -52,6 +53,7 @@ namespace TeacherHiring.Android.Injection
             Bind<IDetailPageFactory>().To<StandardDetailPageFactory>();
             Bind<ISubjectsService>().To<SubjectsService>();
             Bind<ICounselService>().To<CounselService>();
+            Bind<IMapInitializer>().To<MapWithPinInitializer>();
         }
     }
 }

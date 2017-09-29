@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeacherHiring.Injection;
 using TeacherHiring.Views.Dashboard.Factory;
+using TeacherHiring.Views.Sections.Initializers;
 
 namespace TeacherHiring.Facades
 {
@@ -30,6 +31,7 @@ namespace TeacherHiring.Facades
         private ISubjectsService subjectsService;
         private ICounselService counselService;
         private IAlertDisplayer alertDisplayer;
+        private IMapInitializer mapInitializer;
 
         public AppFacade(IDependencyResolver dependencyResolver)
         {
@@ -141,6 +143,17 @@ namespace TeacherHiring.Facades
                     alertDisplayer = dependencyResolver.Resolve<IAlertDisplayer>();
 
                 return alertDisplayer;
+            }
+        }
+
+        public IMapInitializer MapInitializer
+        {
+            get
+            {
+                if (mapInitializer == null)
+                    mapInitializer = dependencyResolver.Resolve<IMapInitializer>();
+
+                return mapInitializer;
             }
         }
     }

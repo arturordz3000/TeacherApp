@@ -4,23 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeacherHiring.Views.Sections;
+using TeacherHiring.Views.Sections.PageInstantiators;
+using Xamarin.Forms;
 
 namespace TeacherHiring.Views.Dashboard.Factory
 {
     public class StandardDetailPageFactory : IDetailPageFactory
     {
-        private Dictionary<string, Type> targetTypes = new Dictionary<string, Type>();
+        private Dictionary<string, Page> targetTypes = new Dictionary<string, Page>();
 
         public StandardDetailPageFactory()
         {
             // Student Detail Pages
-            targetTypes.Add("Solicitar Asesoría", typeof(RequestCounselPage));
-            targetTypes.Add("Solicitudes Realizadas", typeof(DashboardPageDetail));
+            targetTypes.Add("Solicitar Asesoría", new SubjectsListPage(new AvailableCounselsPageInstantiator()));
+            targetTypes.Add("Solicitudes Realizadas", new DashboardPageDetail());
 
             // Teacher detail pages
-            targetTypes.Add("Registrar Asesoría", typeof(RegisterCounselPage));
-            targetTypes.Add("Confirmar Asesoría", typeof(ConfirmCounselPage));
-            targetTypes.Add("Asesorías Aceptadas", typeof(AcceptedCounselsPage));
+            targetTypes.Add("Registrar Asesoría", new RegisterCounselPage());
+            targetTypes.Add("Confirmar Asesoría", new SubjectsListPage(new UnConfirmCounselListPageInstantiator()));
+            targetTypes.Add("Asesorías Aceptadas", new AcceptedCounselsPage());
         }
 
         public DashboardPageMenuItem CreateMenuItem(int id, string title)

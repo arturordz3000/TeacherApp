@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherHiring.Views.Sections.CounselRequestDetailPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+    <StackLayout Padding="10" Orientation="Vertical">
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Materia: " VerticalTextAlignment="Center"/>
+            <Label Text="{Binding SubjectName}" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Fecha: " VerticalTextAlignment="Center"/>
+            <Label Text="{Binding CounselDate}" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Hora: " VerticalTextAlignment="Center"/>
+            <Label Text="{Binding CounselTime}" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <Label Text="Alumno: " VerticalTextAlignment="Center"/>
+            <Label Text="{Binding StudentName}" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <maps:Map
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="CounselMap"
+            IsShowingUser="true"
+            MapType="Hybrid" />
+    </StackLayout>
+</ContentPage>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeacherHiring.ViewModels.Sections;
+using TeacherHiring.Views.Sections.Initializers;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -19,6 +20,7 @@ namespace TeacherHiring.Views.Sections
     {
         private ICounselService counselService;
         private IAlertDisplayer alertDisplayer;
+        private IMapInitializer mapInitializer;
         private IExceptionHandler exceptionHandler;
         private CounselSignupPageViewModel counselSignupViewModel;
 
@@ -28,6 +30,7 @@ namespace TeacherHiring.Views.Sections
 
             counselService = App.LogicContext.CounselService;
             alertDisplayer = App.LogicContext.AlertDisplayer;
+            mapInitializer = App.LogicContext.MapInitializer;
             exceptionHandler = App.LogicContext.ExceptionHandler;
             counselSignupViewModel = new CounselSignupPageViewModel { Counsel = counsel };
 
@@ -40,28 +43,12 @@ namespace TeacherHiring.Views.Sections
             try
             {
                 CounselDto counsel = counselSignupViewModel.Counsel;
-                initializeMap(counsel.Latitude, counsel.Longitude, 0.3f);
+                mapInitializer.Initialize(ref CounselMap, counsel.Latitude, counsel.Longitude, 0.3f);
             }
             catch (Exception ex)
             {
                 exceptionHandler.HandleException(this, ex);
             }
-        }
-
-        private void initializeMap(double latitude, double longitude, float distanceInKilometers)
-        {
-            Position center = new Position(latitude, longitude);
-            Distance distance = Distance.FromKilometers(distanceInKilometers);
-            Pin pin = new Pin
-            {
-                Position = center,
-                Type = PinType.Place,
-                Label = "Lugar",
-                Address = "En este lugar se impartirá la asesoría"
-            };
-
-            CounselMap.MoveToRegion(MapSpan.FromCenterAndRadius(center, distance));
-            CounselMap.Pins.Add(pin);
         }
 
         private async Task RequestButton_Clicked(object sender, EventArgs e)

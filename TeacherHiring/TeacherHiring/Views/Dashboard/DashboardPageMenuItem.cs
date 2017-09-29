@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace TeacherHiring.Views.Dashboard
 {
@@ -11,11 +12,11 @@ namespace TeacherHiring.Views.Dashboard
     {
         public DashboardPageMenuItem()
         {
-            TargetType = typeof(DashboardPageDetail);
+            TargetType = new DashboardPageDetail();
         }
         public int Id { get; set; }
         public string Title { get; set; }
 
-        public Type TargetType { get; set; }
+        public Page TargetType { get; set; }
     }
 }

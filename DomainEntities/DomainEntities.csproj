@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataTransferObjects\CounselDto.cs" />
+    <Compile Include="DataTransferObjects\CounselRequestDto.cs" />
     <Compile Include="DataTransferObjects\StudentCounselDto.cs" />
     <Compile Include="DataTransferObjects\SubjectDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

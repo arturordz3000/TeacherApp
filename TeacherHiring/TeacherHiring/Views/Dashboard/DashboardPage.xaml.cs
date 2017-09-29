@@ -32,7 +32,7 @@ namespace TeacherHiring.Views.Dashboard
                 if (item == null)
                     return;
 
-                var page = (Page)Activator.CreateInstance(item.TargetType);
+                Page page = item.TargetType;
                 page.Title = item.Title;
                 Detail = new NavigationPage(page);
                 MasterPage.ListView.SelectedItem = null;

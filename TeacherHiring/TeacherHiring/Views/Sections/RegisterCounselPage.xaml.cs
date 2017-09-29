@@ -70,7 +70,10 @@ namespace TeacherHiring.Views.Sections
                 CounselDto responseCounsel = await counselService.RegisterCounsel(counsel);
 
                 if (responseCounsel != null)
+                {
                     await alertDisplayer.DisplayAlert(this, "Asesoría", "Asesoría registrada exitosamente!", "Ok");
+                    App.Current.MainPage = new Dashboard.DashboardPage();
+                }
             }
             catch (Exception ex)
             {
