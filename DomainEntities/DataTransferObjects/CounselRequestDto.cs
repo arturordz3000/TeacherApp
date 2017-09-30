@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace DomainEntities.DataTransferObjects
 {
@@ -47,6 +48,9 @@ namespace DomainEntities.DataTransferObjects
 
         public override string ToString()
         {
+            if (IsAccepted)
+                return string.Format("(A) {0} - Solicitada por: {1}", SubjectName, StudentName);
+
             return string.Format("{0} - Solicitada por: {1}", SubjectName, StudentName);
         }
     }
